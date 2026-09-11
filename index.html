@@ -4,40 +4,42 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vanshika Shyam</title>
-<meta name="description" content="Computer Science and Mathematics student building software around real problems, and reading toward the math under the models.">
+<meta name="description" content="Computer Science and Mathematics, Vancouver BC. A ridgeline drawn from a softmax distribution — Shimla to Vancouver, and the question that started it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:SOFT,WONK,opsz,wght@0..100,0..1,9..144,300..700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,300..500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
 <style>
-/* ─────────────────────────────────────────────────────────────
-   Tokens — a single committed dark world.
-   Ground is blue-biased, not neutral black: deodar dusk.
-   One warm accent, taken from the hot end of a heatmap ramp.
-   ───────────────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════
+   ALPENGLOW
+   The light on Himalayan snow at dawn: indigo night, rose, gold.
+   One idea runs through everything — a ridgeline and a softmax
+   distribution are the same shape. Raise the temperature and the
+   mountains flatten. That is the hero, and it is also the story.
+   ══════════════════════════════════════════════════════════════ */
 :root{
   color-scheme: dark;
 
-  --abyss:#080B11;
-  --slate:#121A26;
-  --raise:#18212F;
-  --rule:#1E2938;
-  --rule-soft:#151E2A;
-  --haze:#8FA0B8;
-  --haze-dim:#5E6E85;
-  --snow:#E9EEF5;
-  --ember:#F0A24A;
-  --ember-dim:#8A5E2C;
-  --pine:#5E9E8F;
+  --night:#070A12;
+  --deep:#0D1120;
+  --indigo:#141A2E;
+  --violet:#2A2F55;
+  --ridge:#3A3E68;
+  --rose:#E2739A;
+  --gold:#F5B25C;
+  --snow:#F2F4F8;
+  --haze:#9AA2C0;
+  --haze-dim:#646C8C;
+  --line:rgba(154,162,192,.16);
+  --line-soft:rgba(154,162,192,.08);
 
-  --f-display:"Fraunces","Iowan Old Style",Georgia,serif;
+  --f-disp:"Syne","Helvetica Neue",Arial,sans-serif;
+  --f-ed:"Fraunces","Iowan Old Style",Georgia,serif;
   --f-body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
   --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
 
-  --measure:63ch;
-  --rail:132px;
-  --gutter:clamp(22px,5vw,84px);
-
-  --s1:8px; --s2:16px; --s3:28px; --s4:48px; --s5:80px; --s6:128px;
+  --gut:clamp(20px,4.4vw,72px);
+  --s1:8px; --s2:16px; --s3:28px; --s4:48px; --s5:84px; --s6:132px;
+  --ease:cubic-bezier(.16,1,.3,1);
 }
 
 *{box-sizing:border-box}
@@ -45,659 +47,576 @@ html{scroll-behavior:smooth}
 
 body{
   margin:0;
-  background:var(--abyss);
+  background:var(--night);
   color:var(--snow);
   font-family:var(--f-body);
   font-size:17px;
-  line-height:1.65;
+  line-height:1.62;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
 
-/* Ambient: a very faint cold glow top-left, warm bottom-right.
-   Fixed so it reads as atmosphere, not as a gradient hero. */
-body::before{
+/* Film grain — keeps the flat gradients from looking like plastic. */
+body::after{
   content:"";
-  position:fixed; inset:0; z-index:0; pointer-events:none;
-  background:
-    radial-gradient(900px 600px at 8% -6%, rgba(38,74,112,.30), transparent 62%),
-    radial-gradient(760px 520px at 104% 108%, rgba(240,162,74,.09), transparent 60%);
+  position:fixed; inset:-50%; z-index:900; pointer-events:none;
+  opacity:.32; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='220' height='220' filter='url(%23n)' opacity='.5'/></svg>");
+  animation:grain 7s steps(6) infinite;
+}
+@keyframes grain{
+  0%,100%{transform:translate(0,0)}
+  20%{transform:translate(-4%,3%)}
+  40%{transform:translate(3%,-4%)}
+  60%{transform:translate(-3%,-3%)}
+  80%{transform:translate(4%,2%)}
 }
 
-.page{position:relative; z-index:1}
+/* ── Load curtain: pure CSS, so it lifts even if JS never runs ── */
+.curtain{
+  position:fixed; inset:0; z-index:1000;
+  background:var(--night);
+  display:flex; align-items:center; justify-content:center;
+  animation:lift 1.45s var(--ease) .75s forwards;
+}
+.curtain span{
+  font-family:var(--f-mono); font-size:.72rem; letter-spacing:.42em;
+  text-transform:uppercase; color:var(--haze-dim);
+  animation:blink 1.1s ease-in-out infinite;
+}
+@keyframes lift{ to{ transform:translateY(-101%); pointer-events:none; visibility:hidden } }
+@keyframes blink{ 50%{opacity:.25} }
 
-/* ── Type scale ─────────────────────────────────────────────── */
-h1,h2,h3{margin:0; text-wrap:balance; font-weight:400}
+/* ── Cursor ─────────────────────────────────────────────────── */
+.cur,.cur-r{position:fixed; top:0; left:0; z-index:950; pointer-events:none; border-radius:50%; opacity:0}
+.cur{width:6px; height:6px; background:var(--gold); margin:-3px 0 0 -3px}
+.cur-r{
+  width:34px; height:34px; margin:-17px 0 0 -17px;
+  border:1px solid rgba(226,115,154,.55);
+  transition:width .35s var(--ease), height .35s var(--ease), margin .35s var(--ease), background .35s var(--ease), border-color .35s var(--ease);
+}
+.cur-r.hot{width:66px; height:66px; margin:-33px 0 0 -33px; background:rgba(245,178,92,.10); border-color:rgba(245,178,92,.75)}
+@media (hover:none),(pointer:coarse){ .cur,.cur-r{display:none} }
 
-.display{
-  font-family:var(--f-display);
-  font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 120;
-  font-weight:350;
-  letter-spacing:-.022em;
-  line-height:1.02;
+/* ── Type ───────────────────────────────────────────────────── */
+h1,h2,h3{margin:0; font-weight:400; text-wrap:balance}
+
+.kinetic{
+  font-family:var(--f-disp); font-weight:800;
+  letter-spacing:-.045em; line-height:.84;
+  text-transform:uppercase;
 }
 
-h2.display{font-size:clamp(2.1rem,5.4vw,3.5rem); line-height:1.06}
-h3{font-family:var(--f-body); font-size:1.06rem; font-weight:600; letter-spacing:-.005em}
+.h2{
+  font-family:var(--f-disp); font-weight:800;
+  font-size:clamp(2.4rem,7.4vw,5.4rem);
+  letter-spacing:-.042em; line-height:.92; text-transform:uppercase;
+}
+.h2 .tint{
+  background:linear-gradient(96deg,var(--gold),var(--rose) 62%,var(--violet));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
 
-p{margin:0; max-width:var(--measure)}
+.ed{font-family:var(--f-ed); font-style:italic; font-weight:400}
+
+p{margin:0; max-width:62ch}
+.dim{color:var(--haze)}
 .stack{display:flex; flex-direction:column; gap:var(--s3)}
-.stack-tight{display:flex; flex-direction:column; gap:var(--s2)}
-
-.lede{
-  font-family:var(--f-display);
-  font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 40;
-  font-size:clamp(1.25rem,2.5vw,1.62rem);
-  line-height:1.42;
-  color:var(--snow);
-  letter-spacing:-.012em;
-  max-width:34ch;
-}
-
-.body-dim{color:var(--haze)}
 
 .eyebrow{
-  font-family:var(--f-mono);
-  font-size:.7rem;
-  letter-spacing:.17em;
-  text-transform:uppercase;
-  color:var(--haze-dim);
-  margin:0;
+  font-family:var(--f-mono); font-size:.68rem; letter-spacing:.28em;
+  text-transform:uppercase; color:var(--haze-dim); margin:0;
+  display:flex; align-items:center; gap:12px;
 }
-.eyebrow .mark{color:var(--ember)}
+.eyebrow::before{content:""; width:26px; height:1px; background:var(--gold); flex:none}
 
-.mono{font-family:var(--f-mono); font-variant-numeric:tabular-nums}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold); outline-offset:4px}
 
-em{font-style:italic; color:var(--snow)}
-strong{font-weight:600; color:var(--snow)}
-
-a{color:var(--snow); text-decoration-color:var(--ember-dim); text-underline-offset:.22em; text-decoration-thickness:1px}
-a:hover{text-decoration-color:var(--ember)}
-a:focus-visible,button:focus-visible{outline:2px solid var(--ember); outline-offset:3px; border-radius:2px}
-
-/* Placeholders waiting on the résumé — visibly marked, never faked. */
 .todo{
-  color:var(--ember);
-  border-bottom:1px dashed var(--ember-dim);
-  font-family:var(--f-mono);
-  font-size:.88em;
-  cursor:help;
+  color:var(--gold); border-bottom:1px dashed rgba(245,178,92,.45);
+  font-family:var(--f-mono); font-size:.86em; cursor:help;
 }
 
-/* ── Shell ──────────────────────────────────────────────────── */
-.wrap{
-  max-width:1180px;
-  margin:0 auto;
-  padding:0 var(--gutter) 0 calc(var(--gutter) + var(--rail));
-}
-@media (max-width:940px){ .wrap{padding-left:var(--gutter)} }
+.wrap{max-width:1320px; margin:0 auto; padding-inline:var(--gut)}
+section{position:relative; z-index:2}
 
-section{padding-block:var(--s6)}
-section + section{border-top:1px solid var(--rule-soft)}
-
-.sec-head{display:flex; flex-direction:column; gap:var(--s2); margin-bottom:var(--s4)}
-
-/* ── Left rail: position in the document, phrased as position
-      in a context window. Sequence here is real, so it's numbered. ── */
+/* ── Rail ───────────────────────────────────────────────────── */
 .rail{
-  position:fixed; left:0; top:0; bottom:0; width:var(--rail);
-  display:flex; flex-direction:column; justify-content:center; gap:2px;
-  padding-left:var(--gutter);
-  z-index:20;
-  font-family:var(--f-mono); font-size:.68rem; letter-spacing:.08em;
+  position:fixed; right:var(--gut); top:50%; transform:translateY(-50%);
+  z-index:120; display:flex; flex-direction:column; gap:14px; align-items:flex-end;
 }
-@media (max-width:940px){ .rail{display:none} }
-
+@media (max-width:900px){ .rail{display:none} }
 .rail a{
-  display:flex; align-items:center; gap:9px;
-  color:var(--haze-dim);
-  text-decoration:none;
-  padding:5px 0;
-  transition:color .25s ease;
+  display:flex; align-items:center; gap:10px; text-decoration:none;
+  font-family:var(--f-mono); font-size:.6rem; letter-spacing:.2em;
+  text-transform:uppercase; color:transparent; transition:color .3s var(--ease);
 }
-.rail a .tick{
-  width:14px; height:1px; background:currentColor;
-  transition:width .3s cubic-bezier(.2,.8,.2,1), background .25s ease;
-  flex:none;
-}
+.rail i{width:16px; height:2px; background:var(--haze-dim); display:block; transition:all .4s var(--ease)}
 .rail a:hover{color:var(--haze)}
-.rail a[aria-current="true"]{color:var(--ember)}
-.rail a[aria-current="true"] .tick{width:30px; background:var(--ember)}
+.rail a[aria-current="true"]{color:var(--gold)}
+.rail a[aria-current="true"] i{width:40px; background:var(--gold)}
 
-.rail-meter{
-  position:absolute; left:calc(var(--gutter) - 11px); top:50%;
-  transform:translateY(-50%);
-  width:1px; height:190px; background:var(--rule);
+/* ══ HERO ═══════════════════════════════════════════════════ */
+.hero{
+  position:relative; min-height:94vh;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  overflow:hidden; padding-bottom:var(--s4);
 }
-.rail-meter i{
-  position:absolute; left:-1px; top:0; width:3px; height:0;
-  background:var(--ember); display:block;
+#ridge{
+  position:absolute; inset:0; width:100%; height:100%;
+  display:block; z-index:0;
 }
+.hero .wrap{position:relative; z-index:3; width:100%}
 
-/* ── Hero ───────────────────────────────────────────────────── */
-.hero{padding-top:clamp(64px,11vh,116px); padding-bottom:var(--s6)}
-.hero-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,440px);
-  gap:clamp(32px,5vw,72px);
-  align-items:center;
+.hero-loc{
+  margin-bottom:clamp(14px,2.2vw,26px);
+  opacity:0; animation:fadeUp .9s var(--ease) .8s forwards;
 }
-@media (max-width:900px){ .hero-grid{grid-template-columns:1fr} }
+.hero-name{
+  font-size:clamp(2.35rem,9.6vw,146px);
+  margin-bottom:clamp(14px,2vw,26px);
+}
+/* Each letter wipes up from its own clipping box. */
+.ln{display:block; overflow:hidden; white-space:nowrap}
+.ln b{display:inline-block; font-weight:800; transform:translateY(104%); animation:rise 1.15s var(--ease) forwards}
+@keyframes rise{ to{transform:translateY(0)} }
+.hero-name .two b{color:var(--haze)}
 
-.name{
-  font-size:clamp(3.1rem,9.2vw,6.1rem);
-  margin:var(--s2) 0 0;
+.hero-foot{
+  display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
+  gap:var(--s3); padding-top:var(--s3); border-top:1px solid var(--line);
+  opacity:0; animation:fadeUp 1s var(--ease) 1.5s forwards;
 }
-.name .given{display:block}
-.name .family{display:block; color:var(--haze); font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 144; font-style:italic}
+@keyframes fadeUp{ from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none} }
 
-.hero-sub{margin-top:var(--s3); max-width:40ch}
+.hero-say{font-size:clamp(1.05rem,2.1vw,1.42rem); max-width:33ch; line-height:1.44; color:var(--snow)}
+.hero-say .ed{color:var(--gold)}
 
-.meta{
-  display:flex; flex-wrap:wrap; gap:var(--s1) var(--s3);
-  margin-top:var(--s4);
-  font-family:var(--f-mono); font-size:.76rem; color:var(--haze-dim);
-  letter-spacing:.04em;
-}
-.meta span{display:flex; align-items:center; gap:8px}
-.dot{width:5px; height:5px; border-radius:50%; background:var(--pine); flex:none}
-.dot.open{box-shadow:0 0 0 0 rgba(94,158,143,.6); animation:pulse 2.8s ease-out infinite}
-@keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(94,158,143,.5)}
-  70%{box-shadow:0 0 0 7px rgba(94,158,143,0)}
-  100%{box-shadow:0 0 0 0 rgba(94,158,143,0)}
-}
+.gauge{display:flex; flex-direction:column; gap:7px; font-family:var(--f-mono); font-size:.68rem; letter-spacing:.09em; color:var(--haze-dim); min-width:236px}
+.gauge div{display:flex; justify-content:space-between; gap:var(--s2)}
+.gauge b{font-weight:500; color:var(--gold); font-variant-numeric:tabular-nums}
+.gauge .bar{height:2px; background:var(--line); position:relative; margin-top:3px}
+.gauge .bar i{position:absolute; inset:0 auto 0 0; width:8%; background:linear-gradient(90deg,var(--gold),var(--rose)); display:block}
+.gauge .note{display:block; color:var(--haze-dim); line-height:1.5; letter-spacing:.02em; max-width:30ch}
 
-/* ── Attention canvas ───────────────────────────────────────── */
-.attn{
-  display:flex; flex-direction:column; gap:var(--s2);
+/* ── Marquee ────────────────────────────────────────────────── */
+.tick{
+  border-block:1px solid var(--line); overflow:hidden; padding-block:18px;
+  background:rgba(20,26,46,.35); position:relative; z-index:4;
 }
-.attn-frame{
-  position:relative;
-  border:1px solid var(--rule);
-  background:#0A0F16;
-  padding:14px;
+.tick-in{display:flex; width:max-content; animation:slide 34s linear infinite}
+.tick:hover .tick-in{animation-play-state:paused}
+@keyframes slide{ to{transform:translateX(-50%)} }
+.tick span{
+  font-family:var(--f-disp); font-weight:700; font-size:clamp(1.1rem,2.4vw,1.75rem);
+  text-transform:uppercase; letter-spacing:-.02em; color:var(--haze-dim);
+  padding-inline:26px; white-space:nowrap;
 }
-.attn-frame::after{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  box-shadow:inset 0 0 60px rgba(240,162,74,.05);
-}
-#attn{display:block; width:100%; height:auto}
+.tick span.g{color:var(--gold)}
+.tick span.r{color:var(--rose)}
 
-.readout{
-  display:flex; flex-wrap:wrap; gap:var(--s1) var(--s3);
-  font-family:var(--f-mono); font-size:.7rem; color:var(--haze-dim);
-  letter-spacing:.05em;
-}
-.readout b{font-weight:500; color:var(--ember); font-variant-numeric:tabular-nums}
-.attn-cap{font-family:var(--f-mono); font-size:.68rem; color:var(--haze-dim); line-height:1.6; letter-spacing:.03em; max-width:46ch}
+/* ── Reveal ─────────────────────────────────────────────────── */
+.js .rv{opacity:0; transform:translateY(34px)}
+.js .rv.in{opacity:1; transform:none; transition:opacity 1s var(--ease), transform 1s var(--ease)}
 
-/* ── Story ──────────────────────────────────────────────────── */
-.story-grid{
-  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:clamp(32px,5vw,68px); align-items:start;
-}
-@media (max-width:900px){ .story-grid{grid-template-columns:1fr} }
+/* ══ STORY ══════════════════════════════════════════════════ */
+.sec{padding-block:var(--s6)}
+.sec-head{margin-bottom:var(--s5); display:flex; flex-direction:column; gap:var(--s3)}
 
-.pull{
-  font-family:var(--f-display);
-  font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 72;
-  font-size:clamp(1.5rem,3.3vw,2.1rem);
-  line-height:1.28; letter-spacing:-.016em;
-  color:var(--snow);
-  border-left:2px solid var(--ember);
-  padding-left:var(--s3);
-  margin:var(--s2) 0;
-  max-width:26ch;
+.story{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:clamp(34px,5vw,86px); align-items:start}
+@media (max-width:980px){ .story{grid-template-columns:1fr} }
+
+.quote{
+  font-family:var(--f-ed); font-style:italic; font-weight:300;
+  font-size:clamp(1.8rem,4.4vw,3.1rem); line-height:1.16; letter-spacing:-.02em;
+  color:var(--snow); margin:var(--s3) 0; max-width:20ch;
 }
+.quote em{font-style:normal; color:var(--gold)}
 
 .figure{
-  border:1px solid var(--rule);
-  background:#0A0F16;
-  padding:var(--s3) var(--s3) var(--s2);
-  display:flex; flex-direction:column; gap:var(--s2);
+  border:1px solid var(--line); background:linear-gradient(170deg,rgba(42,47,85,.42),rgba(13,17,32,.6));
+  padding:var(--s4) var(--s3) var(--s3); display:flex; flex-direction:column; gap:var(--s3);
+  position:sticky; top:var(--s4);
 }
+@media (max-width:980px){ .figure{position:static} }
 .figure svg{display:block; width:100%; height:auto; overflow:visible}
-.fig-cap{font-family:var(--f-mono); font-size:.68rem; color:var(--haze-dim); line-height:1.65; letter-spacing:.03em}
-.ax-line{stroke:var(--rule); stroke-width:1}
-.ax-grid{stroke:var(--rule-soft); stroke-width:1}
-.ax-text{font-family:var(--f-mono); font-size:10px; fill:var(--haze-dim); letter-spacing:.05em}
-.ax-text.hot{fill:var(--ember)}
-.curve{fill:none; stroke:var(--ember); stroke-width:2; stroke-linejoin:round; stroke-linecap:round}
+.cap{font-family:var(--f-mono); font-size:.66rem; color:var(--haze-dim); line-height:1.72; letter-spacing:.02em}
+.axl{stroke:var(--line); stroke-width:1}
+.axg{stroke:var(--line-soft); stroke-width:1}
+.axt{font-family:var(--f-mono); font-size:10px; fill:var(--haze-dim); letter-spacing:.05em}
+.axt.hot{fill:var(--gold)}
 
-/* ── Timeline: order carries meaning, so it is typed and ordered ── */
-.tl{display:flex; flex-direction:column; border-top:1px solid var(--rule-soft)}
-.tl-row{
-  display:grid; grid-template-columns:112px minmax(0,1fr);
-  gap:var(--s3);
-  padding-block:var(--s4);
-  border-bottom:1px solid var(--rule-soft);
-  align-items:start;
+/* ══ PATH — big numerals, alternating, parallax ═════════════ */
+.path{display:flex; flex-direction:column; gap:var(--s5)}
+.leg{display:grid; grid-template-columns:clamp(90px,15vw,220px) minmax(0,1fr); gap:clamp(20px,4vw,58px); align-items:start}
+@media (max-width:760px){ .leg{grid-template-columns:1fr; gap:var(--s2)} }
+.leg .yr{
+  font-family:var(--f-disp); font-weight:800; font-size:clamp(2.2rem,6.4vw,4.6rem);
+  line-height:.85; letter-spacing:-.05em; color:transparent;
+  -webkit-text-stroke:1px var(--haze-dim);
+  transition:color .5s var(--ease), -webkit-text-stroke-color .5s var(--ease);
 }
-@media (max-width:720px){
-  .tl-row{grid-template-columns:1fr; gap:var(--s2); padding-block:var(--s3)}
-}
-.tl-when{
-  font-family:var(--f-mono); font-size:.74rem; letter-spacing:.08em;
-  color:var(--ember); padding-top:.42em;
-}
-.tl-body{display:flex; flex-direction:column; gap:10px}
-.tl-body h3{font-size:1.22rem}
+.leg:hover .yr{color:var(--gold); -webkit-text-stroke-color:transparent}
+.leg-b{display:flex; flex-direction:column; gap:12px; border-top:1px solid var(--line); padding-top:var(--s2)}
+.leg-b h3{font-family:var(--f-disp); font-weight:700; font-size:clamp(1.25rem,2.7vw,1.85rem); letter-spacing:-.028em; line-height:1.12}
 
-/* ── Work: entries separated by rules, not stamped into cards ── */
-.work{display:flex; flex-direction:column}
-.entry{
-  display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
-  gap:clamp(28px,4.5vw,64px);
-  padding-block:var(--s5);
-  border-top:1px solid var(--rule);
-  align-items:start;
+/* ══ WORK ═══════════════════════════════════════════════════ */
+.work{display:flex; flex-direction:column; border-top:1px solid var(--line)}
+.job{
+  position:relative; border-bottom:1px solid var(--line);
+  padding-block:var(--s4); overflow:hidden;
+  transition:padding .5s var(--ease);
 }
-@media (max-width:860px){ .entry{grid-template-columns:1fr; gap:var(--s3)} }
-
-.entry-head{display:flex; flex-direction:column; gap:var(--s2); position:sticky; top:var(--s4)}
-@media (max-width:860px){ .entry-head{position:static} }
-.entry-title{font-family:var(--f-display); font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 72; font-size:clamp(1.75rem,3.4vw,2.4rem); letter-spacing:-.018em; line-height:1.1}
-.entry-kind{font-family:var(--f-mono); font-size:.68rem; letter-spacing:.15em; text-transform:uppercase; color:var(--haze-dim)}
-
-.chips{display:flex; flex-wrap:wrap; gap:6px}
-.chip{
-  font-family:var(--f-mono); font-size:.66rem; letter-spacing:.06em;
-  color:var(--haze); border:1px solid var(--rule);
-  padding:4px 9px; white-space:nowrap;
+.job::before{
+  content:""; position:absolute; inset:0; z-index:0;
+  background:linear-gradient(100deg,rgba(226,115,154,.14),rgba(245,178,92,.07) 55%,transparent);
+  transform:scaleX(0); transform-origin:left; transition:transform .75s var(--ease);
 }
-
-.entry-body{display:flex; flex-direction:column; gap:var(--s3)}
-
-/* The one lifted surface on the page: the judgment call.
-   Nothing else gets a fill, so this reads as the emphasis. */
-.callout{
-  background:var(--slate);
-  border-left:2px solid var(--pine);
-  padding:var(--s3);
-  display:flex; flex-direction:column; gap:10px;
+.job:hover::before{transform:scaleX(1)}
+.job > *{position:relative; z-index:1}
+.job-top{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:var(--s2)}
+.job-name{
+  font-family:var(--f-disp); font-weight:800; text-transform:uppercase;
+  font-size:clamp(1.9rem,6.2vw,4.4rem); letter-spacing:-.045em; line-height:.94;
+  transition:transform .6s var(--ease);
 }
-.callout .eyebrow{color:var(--pine)}
-
-.facts{display:flex; flex-direction:column; border-top:1px solid var(--rule-soft)}
-.fact{
-  display:grid; grid-template-columns:150px minmax(0,1fr);
-  gap:var(--s2);
-  padding-block:11px;
-  border-bottom:1px solid var(--rule-soft);
-  font-size:.93rem;
+.job:hover .job-name{transform:translateX(clamp(8px,1.6vw,22px))}
+.job-kind{font-family:var(--f-mono); font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--haze-dim)}
+.job-body{
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(22px,3.4vw,56px); margin-top:var(--s3);
 }
-@media (max-width:520px){ .fact{grid-template-columns:1fr; gap:2px; padding-block:12px} }
-.fact dt{font-family:var(--f-mono); font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; color:var(--haze-dim); padding-top:.3em}
+@media (max-width:860px){ .job-body{grid-template-columns:1fr} }
+.job.muted .job-name{color:var(--haze-dim)}
+
+.chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:var(--s2)}
+.chip{font-family:var(--f-mono); font-size:.63rem; letter-spacing:.07em; color:var(--haze); border:1px solid var(--line); padding:4px 10px; white-space:nowrap}
+
+.facts{display:flex; flex-direction:column}
+.fact{display:grid; grid-template-columns:132px minmax(0,1fr); gap:var(--s2); padding-block:10px; border-bottom:1px solid var(--line-soft); font-size:.92rem}
+@media (max-width:560px){ .fact{grid-template-columns:1fr; gap:2px} }
+.fact dt{font-family:var(--f-mono); font-size:.64rem; letter-spacing:.13em; text-transform:uppercase; color:var(--haze-dim); padding-top:.4em}
 .fact dd{margin:0; color:var(--haze)}
 
-/* ── Toolkit ────────────────────────────────────────────────── */
-.kit{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:var(--s4) var(--s3)}
-.kit-col{display:flex; flex-direction:column; gap:11px}
-.kit-col h3{font-family:var(--f-mono); font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:var(--ember); font-weight:500}
-.kit-col ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:7px}
-.kit-col li{color:var(--haze); font-size:.95rem; border-bottom:1px solid var(--rule-soft); padding-bottom:7px}
-
-/* ── Off the clock ──────────────────────────────────────────── */
-.life{display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:var(--s4) var(--s3)}
-.life-item{display:flex; flex-direction:column; gap:10px; border-top:1px solid var(--rule); padding-top:var(--s2)}
-.life-item .n{font-family:var(--f-mono); font-size:.68rem; color:var(--ember); letter-spacing:.12em}
-
-/* ── Contact ────────────────────────────────────────────────── */
-.contact{padding-bottom:var(--s6)}
-.links{display:flex; flex-direction:column; border-top:1px solid var(--rule)}
-.link-row{
-  display:flex; align-items:baseline; justify-content:space-between; gap:var(--s3);
-  padding-block:var(--s3);
-  border-bottom:1px solid var(--rule);
-  text-decoration:none;
-  transition:padding-left .3s cubic-bezier(.2,.8,.2,1), color .25s ease;
+.callout{
+  border-left:2px solid var(--rose); padding:var(--s2) 0 var(--s2) var(--s3);
+  display:flex; flex-direction:column; gap:11px; margin-top:var(--s2);
 }
-.link-row:hover{padding-left:14px; color:var(--ember)}
-.link-row .what{font-family:var(--f-display); font-variation-settings:"SOFT" 0,"WONK" 1,"opsz" 60; font-size:clamp(1.35rem,2.7vw,1.85rem); letter-spacing:-.014em}
-.link-row .where{font-family:var(--f-mono); font-size:.76rem; color:var(--haze-dim); text-align:right}
-.link-row:hover .where{color:var(--haze)}
+.callout .eyebrow{color:var(--rose)}
+.callout .eyebrow::before{background:var(--rose)}
+
+/* ══ KIT ════════════════════════════════════════════════════ */
+.kit{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:var(--s4) var(--s3)}
+.kit-c{display:flex; flex-direction:column; gap:12px}
+.kit-c h3{font-family:var(--f-mono); font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:500}
+.kit-c ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px}
+.kit-c li{color:var(--haze); font-size:.94rem; border-bottom:1px solid var(--line-soft); padding-bottom:8px}
+
+/* ══ LIFE ═══════════════════════════════════════════════════ */
+.life{display:grid; grid-template-columns:repeat(auto-fit,minmax(258px,1fr)); gap:var(--s4) var(--s3)}
+.li{display:flex; flex-direction:column; gap:12px}
+.li .no{font-family:var(--f-disp); font-weight:800; font-size:2.7rem; line-height:1; letter-spacing:-.05em; color:transparent; -webkit-text-stroke:1px var(--rose)}
+.li h3{font-family:var(--f-disp); font-weight:700; font-size:1.22rem; letter-spacing:-.024em}
+
+/* ══ CONTACT ════════════════════════════════════════════════ */
+.links{display:flex; flex-direction:column; border-top:1px solid var(--line)}
+.lk{
+  display:flex; align-items:baseline; justify-content:space-between; gap:var(--s3);
+  padding-block:var(--s3); border-bottom:1px solid var(--line); text-decoration:none;
+  transition:padding-left .55s var(--ease);
+}
+.lk .w{
+  font-family:var(--f-disp); font-weight:800; text-transform:uppercase;
+  font-size:clamp(1.6rem,5vw,3.4rem); letter-spacing:-.04em; line-height:1;
+  transition:color .4s var(--ease);
+}
+.lk .a{font-family:var(--f-mono); font-size:.7rem; color:var(--haze-dim); text-align:right; letter-spacing:.05em}
+.lk:hover{padding-left:clamp(10px,2vw,28px)}
+.lk:hover .w{color:var(--gold)}
+.lk:hover .a{color:var(--haze)}
 
 footer{
-  padding:var(--s4) 0 var(--s5);
-  font-family:var(--f-mono); font-size:.68rem; color:var(--haze-dim);
-  letter-spacing:.05em;
+  padding-block:var(--s4) var(--s5);
+  font-family:var(--f-mono); font-size:.65rem; color:var(--haze-dim); letter-spacing:.07em;
   display:flex; flex-wrap:wrap; gap:var(--s1) var(--s3); justify-content:space-between;
-  border-top:1px solid var(--rule-soft);
 }
-
-/* ── Reveal: additive only. Without JS everything is visible. ── */
-.js .reveal{opacity:0; transform:translateY(16px)}
-.js .reveal.in{opacity:1; transform:none; transition:opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1)}
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .js .reveal{opacity:1; transform:none}
-  .dot.open{animation:none}
+  .js .rv{opacity:1; transform:none}
+  .ln b{transform:none; animation:none}
+  .hero-foot{opacity:1; animation:none}
+  .curtain{display:none}
+  .tick-in{animation:none}
+  body::after{animation:none}
   *{transition-duration:.01ms !important}
 }
 </style>
 </head>
 <body>
 
+<div class="curtain" aria-hidden="true"><span>softmax &middot; loading</span></div>
+<div class="cur" aria-hidden="true"></div>
+<div class="cur-r" aria-hidden="true"></div>
+
 <nav class="rail" aria-label="Sections">
-  <div class="rail-meter" aria-hidden="true"><i id="meter"></i></div>
-  <a href="#top"><span class="tick"></span>00 &nbsp;top</a>
-  <a href="#question"><span class="tick"></span>01 &nbsp;question</a>
-  <a href="#path"><span class="tick"></span>02 &nbsp;path</a>
-  <a href="#work"><span class="tick"></span>03 &nbsp;work</a>
-  <a href="#toolkit"><span class="tick"></span>04 &nbsp;toolkit</a>
-  <a href="#life"><span class="tick"></span>05 &nbsp;offline</a>
-  <a href="#contact"><span class="tick"></span>06 &nbsp;contact</a>
+  <a href="#top"><span>top</span><i></i></a>
+  <a href="#question"><span>question</span><i></i></a>
+  <a href="#path"><span>path</span><i></i></a>
+  <a href="#work"><span>work</span><i></i></a>
+  <a href="#kit"><span>toolkit</span><i></i></a>
+  <a href="#life"><span>offline</span><i></i></a>
+  <a href="#contact"><span>contact</span><i></i></a>
 </nav>
 
-<div class="page">
-<div class="wrap">
-
 <!-- ══ HERO ══════════════════════════════════════════════════ -->
-<section class="hero" id="top">
-  <div class="hero-grid">
+<header class="hero" id="top">
+  <canvas id="ridge" aria-label="An animated Himalayan ridgeline drawn from a softmax probability distribution. As the page scrolls the temperature rises and the peaks flatten toward a plain."></canvas>
+  <div class="wrap">
 
-    <div>
-      <p class="eyebrow"><span class="mark">&#9670;</span> &nbsp;Shimla, Himachal Pradesh &nbsp;&rarr;&nbsp; Canada</p>
+    <p class="eyebrow hero-loc">Shimla, Himachal Pradesh &nbsp;&rarr;&nbsp; Vancouver, British Columbia</p>
 
-      <h1 class="name display">
-        <span class="given">Vanshika</span>
-        <span class="family">Shyam</span>
-      </h1>
+    <h1 class="hero-name kinetic" aria-label="Vanshika Shyam">
+      <span class="ln one" aria-hidden="true"
+        ><b style="animation-delay:.95s">V</b><b style="animation-delay:1.00s">A</b><b style="animation-delay:1.05s">N</b><b style="animation-delay:1.10s">S</b><b style="animation-delay:1.15s">H</b><b style="animation-delay:1.20s">I</b><b style="animation-delay:1.25s">K</b><b style="animation-delay:1.30s">A</b></span>
+      <span class="ln two" aria-hidden="true"
+        ><b style="animation-delay:1.16s">S</b><b style="animation-delay:1.21s">H</b><b style="animation-delay:1.26s">Y</b><b style="animation-delay:1.31s">A</b><b style="animation-delay:1.36s">M</b></span>
+    </h1>
 
-      <p class="lede hero-sub">
-        I build software around real problems &mdash; and I&rsquo;m working my way
-        down to the mathematics underneath the models I use every day.
+    <div class="hero-foot">
+      <p class="hero-say">
+        Computer Science &amp; Mathematics. I build software around real problems,
+        and I&rsquo;m working my way down to <span class="ed">the mathematics underneath
+        the models</span> I use every day.
       </p>
 
-      <div class="meta">
-        <span>B.Sc. Computer Science</span>
-        <span>Minor in Mathematics</span>
-        <span><i class="dot open"></i> Open to SWE &amp; AI engineering internships</span>
+      <div class="gauge" aria-hidden="true">
+        <div><span>softmax(s / T)</span><b id="g-t">T&nbsp;=&nbsp;0.40</b></div>
+        <div><span>peak weight</span><b id="g-p">0.94</b></div>
+        <div class="bar"><i id="g-bar"></i></div>
+        <span class="note" id="g-note">Sharp. One peak takes almost everything.</span>
       </div>
     </div>
 
-    <figure class="attn" style="margin:0">
-      <div class="attn-frame">
-        <canvas id="attn" width="880" height="880" role="img"
-          aria-label="A causal self-attention matrix. Each row is one token attending to the tokens before it. As the row cursor descends and the context grows, the attention mass landing on the first token collapses."></canvas>
-      </div>
-      <div class="readout" aria-hidden="true">
-        <span>row <b id="r-i">00</b></span>
-        <span>context <b id="r-n">1</b> tok</span>
-        <span>&alpha;(t&#8320;) <b id="r-a">100.0%</b></span>
-      </div>
-      <figcaption class="attn-cap">
-        Causal self-attention, 32 tokens. Each row is one token attending backwards;
-        the dark upper triangle is the causal mask. Brightness is weight relative to an
-        even split &mdash; so watch the left column fade as the rows get longer.
-      </figcaption>
-    </figure>
-
   </div>
-</section>
+</header>
 
-<!-- ══ THE QUESTION ══════════════════════════════════════════ -->
-<section id="question">
-  <div class="sec-head reveal">
-    <p class="eyebrow">01 &nbsp;/&nbsp; where this started</p>
-    <h2 class="display">It kept forgetting.</h2>
+<div class="tick" aria-hidden="true">
+  <div class="tick-in">
+    <span>Shimla &rarr; Vancouver</span><span class="g">&#10022;</span>
+    <span>Causal attention</span><span class="r">&#10022;</span>
+    <span>Linear algebra</span><span class="g">&#10022;</span>
+    <span>FastAPI</span><span class="r">&#10022;</span>
+    <span>Caf&eacute; rankings</span><span class="g">&#10022;</span>
+    <span>Softmax</span><span class="r">&#10022;</span>
+    <span>Shimla &rarr; Vancouver</span><span class="g">&#10022;</span>
+    <span>Causal attention</span><span class="r">&#10022;</span>
+    <span>Linear algebra</span><span class="g">&#10022;</span>
+    <span>FastAPI</span><span class="r">&#10022;</span>
+    <span>Caf&eacute; rankings</span><span class="g">&#10022;</span>
+    <span>Softmax</span><span class="r">&#10022;</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ══ QUESTION ══════════════════════════════════════════════ -->
+<section class="sec" id="question">
+  <div class="sec-head rv">
+    <p class="eyebrow">01 &mdash; where this started</p>
+    <h2 class="h2">It kept<br><span class="tint">forgetting.</span></h2>
   </div>
 
-  <div class="story-grid">
-
-    <div class="stack reveal">
+  <div class="story">
+    <div class="stack rv">
       <p>
-        I started my Computer Science degree in 2023, which was the same year these
-        tools landed in front of me. Before that I&rsquo;d never had anything like them.
-        They were genuinely useful &mdash; for studying, for picking up skills faster than
-        a textbook would let me, for getting unstuck at 1&nbsp;a.m.
+        I started my Computer Science degree in 2023, the same year these tools landed
+        in front of me. Before that I&rsquo;d never had anything like them. They were genuinely
+        useful &mdash; for studying, for picking up skills faster than a textbook would let me,
+        for getting unstuck at 1&nbsp;a.m.
       </p>
-      <p class="body-dim">
-        But something happened in the long conversations. Past a certain point the
-        answers went strange. It would contradict what it had told me an hour earlier,
-        lose the thread of what we were building, get confidently wrong about things
-        it had been right about at the top of the chat.
+      <p class="dim">
+        But something happened in the long conversations. Past a certain point the answers
+        went strange. It would contradict what it had told me an hour earlier, lose the
+        thread of what we were building, get confidently wrong about things it had been
+        right about at the top of the chat.
       </p>
       <p>
         Most people close the tab and open a fresh one. I wanted to know
         <em>what had actually changed</em> between the good answers and the bad ones.
       </p>
 
-      <blockquote class="pull">
-        Attention is a probability distribution. A distribution over more things is a thinner distribution.
+      <blockquote class="quote">
+        Attention is a <em>probability distribution.</em> A distribution over more things is a thinner one.
       </blockquote>
 
-      <p class="body-dim">
-        That turned out to be a door into mathematics I was already learning to love.
-        Every token in the context competes for a fixed budget of attention &mdash; the
-        softmax normalises each row to sum to one. Add more context and every earlier
-        token&rsquo;s share gets smaller. The instruction you gave at the start isn&rsquo;t deleted.
-        It&rsquo;s diluted.
+      <p class="dim">
+        Every token competes for a fixed budget of attention &mdash; softmax normalises the row
+        to sum to one. Add more context and every earlier token&rsquo;s share shrinks. The
+        instruction you gave at the start isn&rsquo;t deleted. It&rsquo;s <strong>diluted</strong>.
       </p>
-      <p class="body-dim">
+      <p class="dim">
         That&rsquo;s the simplified version, and I know it. Real degradation is also positional
-        encodings extrapolating past the range they were trained on, quantisation error
-        compounding in a long KV cache, and instruction drift. But the softmax intuition
-        was the door in, and I&rsquo;ve been reading through it ever since.
+        encodings extrapolating past their trained range, quantisation error compounding in
+        a long KV cache, and instruction drift. But the softmax intuition was the door in,
+        and I&rsquo;ve been reading through it ever since.
       </p>
       <p>
-        It also settled a question I&rsquo;d been carrying since I picked my degree: I didn&rsquo;t
-        want to only <em>use</em> the tools. I wanted to be able to explain them.
+        It settled something I&rsquo;d been carrying since I picked my degree: I didn&rsquo;t want to
+        only <em>use</em> these things. I wanted to be able to explain them.
       </p>
     </div>
 
-    <div class="figure reveal">
-      <svg viewBox="0 0 660 300" role="img" aria-label="Line chart. With uniform scores, the softmax share of any single token falls as one over n. At 8 tokens of context each gets 12.5 percent; by 2048 tokens each gets 0.05 percent.">
-        <!-- gridlines -->
-        <line class="ax-grid" x1="70" y1="30"  x2="620" y2="30"></line>
-        <line class="ax-grid" x1="70" y1="74"  x2="620" y2="74"></line>
-        <line class="ax-grid" x1="70" y1="162" x2="620" y2="162"></line>
-        <!-- axes -->
-        <line class="ax-line" x1="70" y1="250" x2="620" y2="250"></line>
-        <line class="ax-line" x1="70" y1="30"  x2="70"  y2="250"></line>
-        <!-- y labels -->
-        <text class="ax-text" x="62" y="34"  text-anchor="end">12.5%</text>
-        <text class="ax-text" x="62" y="78"  text-anchor="end">10%</text>
-        <text class="ax-text" x="62" y="166" text-anchor="end">5%</text>
-        <text class="ax-text" x="62" y="254" text-anchor="end">0%</text>
-        <!-- x labels -->
-        <text class="ax-text" x="70"  y="270" text-anchor="middle">8</text>
-        <text class="ax-text" x="253" y="270" text-anchor="middle">64</text>
-        <text class="ax-text" x="437" y="270" text-anchor="middle">512</text>
-        <text class="ax-text" x="620" y="270" text-anchor="middle">4096</text>
-        <text class="ax-text" x="345" y="290" text-anchor="middle">context length n &nbsp;(tokens, log scale)</text>
-        <!-- area + curve -->
-        <path fill="rgba(240,162,74,.10)" stroke="none"
-              d="M70,30 L131,140 L192,195 L253,222 L314,236 L376,243 L437,247 L498,248 L559,249 L620,250 L620,250 L70,250 Z"></path>
-        <path class="curve" d="M70,30 L131,140 L192,195 L253,222 L314,236 L376,243 L437,247 L498,248 L559,249 L620,250"></path>
-        <!-- called-out points -->
-        <circle cx="70" cy="30" r="3.5" fill="#F0A24A"></circle>
-        <text class="ax-text hot" x="80" y="27">n = 8 &rarr; 12.50% each</text>
-        <circle cx="559" cy="249" r="3.5" fill="#F0A24A"></circle>
-        <text class="ax-text hot" x="551" y="238" text-anchor="end">n = 2048 &rarr; 0.05% each</text>
+    <div class="figure rv">
+      <svg viewBox="0 0 660 300" role="img" aria-label="With uniform scores the softmax share of a single token falls as one over n: 12.5 percent at 8 tokens, 0.05 percent at 2048.">
+        <line class="axg" x1="70" y1="30" x2="620" y2="30"></line>
+        <line class="axg" x1="70" y1="74" x2="620" y2="74"></line>
+        <line class="axg" x1="70" y1="162" x2="620" y2="162"></line>
+        <line class="axl" x1="70" y1="250" x2="620" y2="250"></line>
+        <line class="axl" x1="70" y1="30" x2="70" y2="250"></line>
+        <text class="axt" x="62" y="34" text-anchor="end">12.5%</text>
+        <text class="axt" x="62" y="78" text-anchor="end">10%</text>
+        <text class="axt" x="62" y="166" text-anchor="end">5%</text>
+        <text class="axt" x="62" y="254" text-anchor="end">0%</text>
+        <text class="axt" x="70" y="270" text-anchor="middle">8</text>
+        <text class="axt" x="253" y="270" text-anchor="middle">64</text>
+        <text class="axt" x="437" y="270" text-anchor="middle">512</text>
+        <text class="axt" x="620" y="270" text-anchor="middle">4096</text>
+        <text class="axt" x="345" y="291" text-anchor="middle">context length n (tokens, log scale)</text>
+        <defs>
+          <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#F5B25C" stop-opacity=".30"></stop>
+            <stop offset="1" stop-color="#E2739A" stop-opacity="0"></stop>
+          </linearGradient>
+        </defs>
+        <path fill="url(#fade)" d="M70,30 L131,140 L192,195 L253,222 L314,236 L376,243 L437,247 L498,248 L559,249 L620,250 L70,250 Z"></path>
+        <path fill="none" stroke="#F5B25C" stroke-width="2.2" stroke-linejoin="round"
+              d="M70,30 L131,140 L192,195 L253,222 L314,236 L376,243 L437,247 L498,248 L559,249 L620,250"></path>
+        <circle cx="70" cy="30" r="4" fill="#F5B25C"></circle>
+        <text class="axt hot" x="82" y="27">n = 8 &rarr; 12.50% each</text>
+        <circle cx="559" cy="249" r="4" fill="#E2739A"></circle>
+        <text class="axt hot" x="551" y="238" text-anchor="end" style="fill:#E2739A">n = 2048 &rarr; 0.05% each</text>
       </svg>
-      <p class="fig-cap">
-        &alpha;&#7522; = exp(s&#7522;) / &Sigma;&#11388; exp(s&#11388;). Hold the scores equal and every
-        token&rsquo;s share is exactly 1/n. Real attention is sharper than uniform &mdash; that&rsquo;s the
-        point of it &mdash; but the ceiling falls the same way, and nothing you said early on
-        is competing on equal footing by token two thousand.
+      <p class="cap">
+        &alpha;&#7522; = exp(s&#7522;) / &Sigma;&#11388; exp(s&#11388;). Hold the scores equal and every token&rsquo;s
+        share is exactly 1/n. Real attention is sharper than uniform &mdash; that is the point of
+        it &mdash; but the ceiling falls the same way, and nothing you said early on is competing
+        on equal footing by token two thousand.
       </p>
     </div>
-
   </div>
 </section>
 
 <!-- ══ PATH ══════════════════════════════════════════════════ -->
-<section id="path">
-  <div class="sec-head reveal">
-    <p class="eyebrow">02 &nbsp;/&nbsp; how I got here</p>
-    <h2 class="display">A fairly indirect line.</h2>
+<section class="sec" id="path">
+  <div class="sec-head rv">
+    <p class="eyebrow">02 &mdash; how I got here</p>
+    <h2 class="h2">A fairly<br><span class="tint">indirect line.</span></h2>
   </div>
 
-  <div class="tl">
+  <div class="path">
+    <div class="leg rv"><div class="yr">HILLS</div><div class="leg-b">
+      <h3>Growing up in Shimla, Himachal Pradesh</h3>
+      <p class="dim">School in the mountains, and a certainty that whatever came next would involve computers &mdash; without much idea which part of &ldquo;computers&rdquo; that meant.</p>
+    </div></div>
 
-    <div class="tl-row reveal">
-      <div class="tl-when">SHIMLA</div>
-      <div class="tl-body">
-        <h3>Growing up in Himachal Pradesh</h3>
-        <p class="body-dim">
-          School in the hills, and a certainty that whatever I did next would involve
-          computers &mdash; without much idea of which part of &ldquo;computers&rdquo; that meant.
-        </p>
-      </div>
-    </div>
+    <div class="leg rv"><div class="yr">2023</div><div class="leg-b">
+      <h3>Moving to Vancouver, choosing a degree under uncertainty</h3>
+      <p class="dim">I arrived genuinely unsure what to enrol in. I was drawn to computer hardware and wanted Computer Engineering &mdash; but it&rsquo;s a longer degree here, so I chose Computer Science. At the time it felt like a compromise. It was the best decision of the degree.</p>
+    </div></div>
 
-    <div class="tl-row reveal">
-      <div class="tl-when">2023</div>
-      <div class="tl-body">
-        <h3>Moving to Canada, and choosing a degree under uncertainty</h3>
-        <p class="body-dim">
-          I came for my undergrad genuinely unsure what to enrol in. I was drawn to
-          computer hardware and wanted Computer Engineering &mdash; but it&rsquo;s a longer degree
-          here, so I chose Computer Science instead. At the time it felt like a compromise.
-          It was the best decision of the degree.
-        </p>
-      </div>
-    </div>
+    <div class="leg rv"><div class="yr">THEN</div><div class="leg-b">
+      <h3>Software engineering clicked. AI engineering clicked harder.</h3>
+      <p class="dim">Building things I could hand to someone turned out to be the part I liked most. And the models I&rsquo;d been using as a study aid became the thing I most wanted to understand &mdash; not as products, as systems.</p>
+    </div></div>
 
-    <div class="tl-row reveal">
-      <div class="tl-when">THEN</div>
-      <div class="tl-body">
-        <h3>Software engineering clicked. AI engineering clicked harder.</h3>
-        <p class="body-dim">
-          Building things I could actually hand to someone turned out to be the part I
-          liked most. And the models I&rsquo;d been using as a study aid became the thing I
-          most wanted to understand &mdash; not as products, as systems.
-        </p>
-      </div>
-    </div>
+    <div class="leg rv"><div class="yr">MATH</div><div class="leg-b">
+      <h3>Adding the mathematics minor</h3>
+      <p class="dim">Not decoration on the degree. Linear algebra and probability aren&rsquo;t adjacent to these models &mdash; they <em>are</em> the models. The minor was the most direct way to stop treating the internals as a black box, and I like the subject on its own terms.</p>
+    </div></div>
 
-    <div class="tl-row reveal">
-      <div class="tl-when">+ MATH</div>
-      <div class="tl-body">
-        <h3>Adding the mathematics minor</h3>
-        <p class="body-dim">
-          Not decoration on the degree. Linear algebra and probability aren&rsquo;t adjacent to
-          these models &mdash; they <em>are</em> the models. A minor was the most direct way to
-          stop treating the internals as a black box, and I like the subject on its own terms.
-        </p>
-      </div>
-    </div>
-
-    <div class="tl-row reveal">
-      <div class="tl-when">NOW</div>
-      <div class="tl-body">
-        <h3>Building, and looking for the room where this is the work</h3>
-        <p class="body-dim">
-          Shipping projects end to end, reading toward retrieval and model internals, and
-          looking for a team where I can do this with people far better at it than I am.
-        </p>
-      </div>
-    </div>
-
+    <div class="leg rv"><div class="yr">NOW</div><div class="leg-b">
+      <h3>Building, and looking for the room where this is the work</h3>
+      <p class="dim">Shipping projects end to end, reading toward retrieval and model internals, and looking for a team where I can do this alongside people far better at it than I am.</p>
+    </div></div>
   </div>
 </section>
 
 <!-- ══ WORK ══════════════════════════════════════════════════ -->
-<section id="work">
-  <div class="sec-head reveal">
-    <p class="eyebrow">03 &nbsp;/&nbsp; selected work</p>
-    <h2 class="display">Things I&rsquo;ve actually shipped.</h2>
+<section class="sec" id="work">
+  <div class="sec-head rv">
+    <p class="eyebrow">03 &mdash; selected work</p>
+    <h2 class="h2">Things I&rsquo;ve<br><span class="tint">actually shipped.</span></h2>
   </div>
 
   <div class="work">
 
-    <!-- ── RentScout ── -->
-    <article class="entry reveal">
-      <div class="entry-head">
-        <p class="entry-kind">Full-stack &middot; data &middot; 2025</p>
-        <h3 class="entry-title">RentScout AI</h3>
-        <div class="chips">
-          <span class="chip">Python</span><span class="chip">FastAPI</span>
-          <span class="chip">PostgreSQL</span><span class="chip">SQLAlchemy</span>
-          <span class="chip">Next.js 16</span><span class="chip">TypeScript</span>
-          <span class="chip">Tailwind</span><span class="chip">Docker</span>
-          <span class="chip">GitHub Actions</span>
-        </div>
+    <article class="job rv">
+      <div class="job-top">
+        <h3 class="job-name">RentScout&nbsp;AI</h3>
+        <span class="job-kind">Full-stack &middot; data &middot; 2025</span>
       </div>
-
-      <div class="entry-body">
-        <p class="lede">
-          Before you send that deposit, check the listing.
-        </p>
-        <p class="body-dim">
-          Vancouver&rsquo;s rental market runs on scams that target people who don&rsquo;t know what
-          rent <em>should</em> cost, don&rsquo;t know their tenant rights, and need housing urgently.
-          I was one of those people. Every rental site shows you listings; none of them help
-          you <em>judge</em> one. RentScout takes a listing you found anywhere &mdash; Craigslist,
-          Marketplace, a WhatsApp group &mdash; and tells you whether it holds up.
-        </p>
-
+      <div class="job-body">
+        <div class="stack">
+          <p style="font-family:var(--f-ed); font-style:italic; font-size:clamp(1.2rem,2.3vw,1.6rem); line-height:1.35; color:var(--gold); max-width:24ch">
+            Before you send that deposit, check the listing.
+          </p>
+          <p class="dim">
+            Vancouver&rsquo;s rental market runs on scams that target people who don&rsquo;t know what
+            rent <em>should</em> cost, don&rsquo;t know their tenant rights, and need housing urgently.
+            I was one of those people. Every rental site shows you listings; none help you
+            <em>judge</em> one.
+          </p>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">PostgreSQL</span>
+            <span class="chip">SQLAlchemy</span><span class="chip">Next.js 16</span><span class="chip">TypeScript</span>
+            <span class="chip">Tailwind</span><span class="chip">Docker</span><span class="chip">GitHub Actions</span>
+          </div>
+          <div class="callout">
+            <p class="eyebrow">The decision I&rsquo;m proudest of</p>
+            <p class="dim" style="max-width:none">
+              There is no legal way to bulk-scrape Craigslist or Marketplace. I could have
+              quietly shipped a scraper and let the demo look richer. Instead the search page
+              runs on <strong>clearly-labelled sample data</strong> and the product focuses on what it
+              can honestly do. The market data is real. A tool that helps people avoid being
+              deceived cannot cut corners on what it claims about itself.
+            </p>
+          </div>
+        </div>
         <dl class="facts">
-          <div class="fact"><dt>Scam screen</dt><dd>Weighted signals across payment red flags, manufactured urgency, and prices benchmarked against the cheapest real listings in that specific neighbourhood &mdash; not a flat threshold. Every flag is explained in plain language.</dd></div>
-          <div class="fact"><dt>Market data</dt><dd>Real CMHC Rental Market Survey vacancy rates, 29 Metro Vancouver zones, 2022&ndash;2025, each with a plain-English read: &ldquo;tight market, move fast&rdquo; vs &ldquo;room to negotiate.&rdquo;</dd></div>
-          <div class="fact"><dt>Budget planner</dt><dd>Live verdict from income and expenses &mdash; comfortable, tight, or financially risky &mdash; with a warning when rent crosses the 30%-of-income guideline.</dd></div>
-          <div class="fact"><dt>Engineering</dt><dd>Dockerised backend and frontend, JWT + bcrypt auth, deterministic seed data, and CI running lint, typecheck, build, and API smoke tests on every push.</dd></div>
+          <div class="fact"><dt>Scam screen</dt><dd>Weighted signals across payment red flags, manufactured urgency, and prices benchmarked against the cheapest real listings in that specific neighbourhood &mdash; not a flat threshold.</dd></div>
+          <div class="fact"><dt>Market data</dt><dd>Real CMHC Rental Market Survey vacancy rates, 29 Metro Vancouver zones, 2022&ndash;2025, each with a plain-English read.</dd></div>
+          <div class="fact"><dt>Budget planner</dt><dd>Live verdict from income and expenses, with a warning when rent crosses the 30%-of-income guideline.</dd></div>
+          <div class="fact"><dt>Engineering</dt><dd>Dockerised front and back, JWT + bcrypt auth, deterministic seed data, CI running lint, typecheck, build and API smoke tests.</dd></div>
+          <div class="fact"><dt>In progress</dt><dd>A retrieval-augmented assistant over the BC Residential Tenancy Act, answering with citations to the actual legislation.</dd></div>
         </dl>
-
-        <div class="callout">
-          <p class="eyebrow">The decision I&rsquo;m proudest of</p>
-          <p class="body-dim" style="max-width:none">
-            There is no legal way to bulk-scrape Craigslist or Facebook Marketplace. I could
-            have quietly shipped a scraper and let the demo look richer. Instead the search
-            page runs on <strong>clearly-labelled sample data</strong>, and the product focuses on
-            what it can honestly do: screen the listing you bring it. The market data is real.
-            And every scan carries the same disclaimer &mdash; a clean result is not a guarantee,
-            never pay before viewing in person.
-          </p>
-          <p class="body-dim" style="max-width:none">
-            A tool that helps people avoid being deceived cannot cut corners on what it claims
-            about itself.
-          </p>
-        </div>
-
-        <p class="body-dim">
-          <strong>In progress:</strong> a retrieval-augmented assistant over the BC Residential
-          Tenancy Act &mdash; ask &ldquo;can my landlord raise rent mid-lease?&rdquo; and get an answer
-          with citations to the actual legislation. It&rsquo;s the piece of this project that sits
-          closest to what I want to do next.
-        </p>
       </div>
     </article>
 
-    <!-- ── Slot 2 ── -->
-    <article class="entry reveal">
-      <div class="entry-head">
-        <p class="entry-kind">Reserved</p>
-        <h3 class="entry-title" style="color:var(--haze-dim)">Project two</h3>
-        <div class="chips"><span class="chip" style="color:var(--haze-dim)">awaiting r&eacute;sum&eacute;</span></div>
+    <article class="job muted rv">
+      <div class="job-top">
+        <h3 class="job-name">Project&nbsp;Two</h3>
+        <span class="job-kind">Reserved &middot; awaiting r&eacute;sum&eacute;</span>
       </div>
-      <div class="entry-body">
-        <p class="body-dim">
-          <span class="todo" title="Send Claude your résumé and this fills in">placeholder</span>
-          &nbsp;&mdash; this slot is built and styled, waiting on content. Drop your r&eacute;sum&eacute;
-          into the chat and this becomes a real case study in the same shape as RentScout:
-          the problem, the decisions, the stack, and the one call you&rsquo;d defend in an interview.
-        </p>
+      <div class="job-body">
+        <p class="dim"><span class="todo" title="Send Claude your résumé and this fills in">placeholder</span>
+          &nbsp;&mdash; built and styled, waiting on content. Drop your r&eacute;sum&eacute; in and this becomes
+          a real case study in the same shape as RentScout: the problem, the decisions, the
+          stack, and the one call you&rsquo;d defend in an interview.</p>
       </div>
     </article>
 
-    <!-- ── Slot 3 ── -->
-    <article class="entry reveal">
-      <div class="entry-head">
-        <p class="entry-kind">Reserved</p>
-        <h3 class="entry-title" style="color:var(--haze-dim)">Project three</h3>
-        <div class="chips"><span class="chip" style="color:var(--haze-dim)">awaiting r&eacute;sum&eacute;</span></div>
+    <article class="job muted rv">
+      <div class="job-top">
+        <h3 class="job-name">Project&nbsp;Three</h3>
+        <span class="job-kind">Reserved &middot; awaiting r&eacute;sum&eacute;</span>
       </div>
-      <div class="entry-body">
-        <p class="body-dim">
-          <span class="todo" title="Send Claude your résumé and this fills in">placeholder</span>
-          &nbsp;&mdash; coursework projects count here, especially anything from the mathematics
-          minor. An implementation of attention from scratch, or a numerical methods
-          assignment you took further than required, would sit perfectly against the story above.
-        </p>
+      <div class="job-body">
+        <p class="dim"><span class="todo" title="Send Claude your résumé and this fills in">placeholder</span>
+          &nbsp;&mdash; coursework counts here, especially from the maths minor. Attention implemented
+          from scratch, or a numerical methods assignment you took further than required, would
+          sit perfectly against the story above.</p>
       </div>
     </article>
 
@@ -705,288 +624,308 @@ footer{
 </section>
 
 <!-- ══ TOOLKIT ═══════════════════════════════════════════════ -->
-<section id="toolkit">
-  <div class="sec-head reveal">
-    <p class="eyebrow">04 &nbsp;/&nbsp; what I work with</p>
-    <h2 class="display">Toolkit, honestly labelled.</h2>
+<section class="sec" id="kit">
+  <div class="sec-head rv">
+    <p class="eyebrow">04 &mdash; what I work with</p>
+    <h2 class="h2">Toolkit,<br><span class="tint">honestly labelled.</span></h2>
   </div>
-
-  <div class="kit reveal">
-    <div class="kit-col">
-      <h3>Languages</h3>
-      <ul><li>Python</li><li>TypeScript</li><li>JavaScript</li><li>SQL</li></ul>
-    </div>
-    <div class="kit-col">
-      <h3>Building</h3>
-      <ul><li>FastAPI</li><li>Next.js &middot; React</li><li>SQLAlchemy</li><li>Tailwind CSS</li></ul>
-    </div>
-    <div class="kit-col">
-      <h3>Data &amp; models</h3>
-      <ul><li>pandas</li><li>OpenAI API</li><li>Retrieval / RAG &mdash; <span class="todo" title="Confirm level from your résumé">learning</span></li><li>BeautifulSoup</li></ul>
-    </div>
-    <div class="kit-col">
-      <h3>Infrastructure</h3>
-      <ul><li>PostgreSQL</li><li>Docker &middot; compose</li><li>GitHub Actions CI</li><li>JWT &middot; bcrypt auth</li></ul>
-    </div>
-    <div class="kit-col">
-      <h3>Mathematics</h3>
-      <ul><li>Linear algebra</li><li>Probability</li><li>Calculus</li><li><span class="todo" title="Add your actual upper-year math courses">your courses here</span></li></ul>
-    </div>
+  <div class="kit rv">
+    <div class="kit-c"><h3>Languages</h3><ul><li>Python</li><li>TypeScript</li><li>JavaScript</li><li>SQL</li></ul></div>
+    <div class="kit-c"><h3>Building</h3><ul><li>FastAPI</li><li>Next.js &middot; React</li><li>SQLAlchemy</li><li>Tailwind CSS</li></ul></div>
+    <div class="kit-c"><h3>Data &amp; models</h3><ul><li>pandas</li><li>OpenAI API</li><li>Retrieval / RAG &mdash; <span class="todo" title="Confirm from your résumé">learning</span></li><li>BeautifulSoup</li></ul></div>
+    <div class="kit-c"><h3>Infrastructure</h3><ul><li>PostgreSQL</li><li>Docker &middot; compose</li><li>GitHub Actions CI</li><li>JWT &middot; bcrypt</li></ul></div>
+    <div class="kit-c"><h3>Mathematics</h3><ul><li>Linear algebra</li><li>Probability</li><li>Calculus</li><li><span class="todo" title="Add your upper-year courses">your courses here</span></li></ul></div>
   </div>
 </section>
 
-<!-- ══ OFF THE CLOCK ═════════════════════════════════════════ -->
-<section id="life">
-  <div class="sec-head reveal">
-    <p class="eyebrow">05 &nbsp;/&nbsp; off the clock</p>
-    <h2 class="display">The rest of it.</h2>
+<!-- ══ LIFE ══════════════════════════════════════════════════ -->
+<section class="sec" id="life">
+  <div class="sec-head rv">
+    <p class="eyebrow">05 &mdash; off the clock</p>
+    <h2 class="h2">The rest<br><span class="tint">of it.</span></h2>
   </div>
-
-  <div class="life reveal">
-
-    <div class="life-item">
-      <span class="n">&#9670; &nbsp;01</span>
+  <div class="life rv">
+    <div class="li"><span class="no">01</span>
       <h3>An unscientific ranking of caf&eacute;s</h3>
-      <p class="body-dim">
-        New city, new cafés, ongoing. I have opinions about all of them and no
-        consistent methodology whatsoever.
-      </p>
+      <p class="dim">New city, new caf&eacute;s, ongoing. I have opinions about all of them and no consistent methodology whatsoever.</p>
     </div>
-
-    <div class="life-item">
-      <span class="n">&#9670; &nbsp;02</span>
+    <div class="li"><span class="no">02</span>
       <h3>Posting my life on YouTube</h3>
-      <p class="body-dim">
-        I make videos about my life here. It started as a way to get comfortable being
-        on camera and it worked &mdash; it&rsquo;s a large part of why I can talk about my own
-        work now without shrinking away from it. Confidence turned out to be a skill
-        you build in public.
-      </p>
+      <p class="dim">It started as a way to get comfortable on camera, and it worked &mdash; it&rsquo;s a large part of why I can talk about my own work now without shrinking away from it. Confidence turned out to be a skill you build in public.</p>
     </div>
-
-    <div class="life-item">
-      <span class="n">&#9670; &nbsp;03</span>
+    <div class="li"><span class="no">03</span>
       <h3>Sleeping</h3>
-      <p class="body-dim">
-        Listed here sincerely and without apology. Ask me about it &mdash; I will defend
-        the position.
-      </p>
+      <p class="dim">Listed sincerely and without apology. Ask me about it &mdash; I will defend the position.</p>
     </div>
-
   </div>
 </section>
 
 <!-- ══ CONTACT ═══════════════════════════════════════════════ -->
-<section id="contact" class="contact">
-  <div class="sec-head reveal">
-    <p class="eyebrow">06 &nbsp;/&nbsp; get in touch</p>
-    <h2 class="display">I&rsquo;d like to hear from you.</h2>
+<section class="sec" id="contact">
+  <div class="sec-head rv">
+    <p class="eyebrow">06 &mdash; get in touch</p>
+    <h2 class="h2">I&rsquo;d like to<br><span class="tint">hear from you.</span></h2>
   </div>
-
-  <div class="links reveal">
-    <a class="link-row" href="mailto:vanshikashyam9@gmail.com">
-      <span class="what">Email</span>
-      <span class="where">vanshikashyam9@gmail.com</span>
-    </a>
-    <a class="link-row" href="#" data-fill="github">
-      <span class="what">GitHub</span>
-      <span class="where">add your handle</span>
-    </a>
-    <a class="link-row" href="#" data-fill="linkedin">
-      <span class="what">LinkedIn</span>
-      <span class="where">add your handle</span>
-    </a>
-    <a class="link-row" href="#" data-fill="youtube">
-      <span class="what">YouTube</span>
-      <span class="where">add your channel</span>
-    </a>
+  <div class="links rv">
+    <a class="lk" href="mailto:vanshikashyam9@gmail.com"><span class="w">Email</span><span class="a">vanshikashyam9@gmail.com</span></a>
+    <a class="lk" href="#"><span class="w">GitHub</span><span class="a">add your handle</span></a>
+    <a class="lk" href="#"><span class="w">LinkedIn</span><span class="a">add your handle</span></a>
+    <a class="lk" href="#"><span class="w">YouTube</span><span class="a">add your channel</span></a>
   </div>
-
   <footer>
     <span>Vanshika Shyam &middot; Computer Science &amp; Mathematics</span>
-    <span>Shimla &rarr; Canada</span>
+    <span>Shimla &rarr; Vancouver</span>
   </footer>
 </section>
 
 </div><!-- /wrap -->
-</div><!-- /page -->
 
 <script>
 (function () {
   "use strict";
-  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   document.documentElement.classList.add("js");
 
   /* ── Reveals ─────────────────────────────────────────────── */
-  var reveals = document.querySelectorAll(".reveal");
+  var rv = document.querySelectorAll(".rv");
   if (reduced || !("IntersectionObserver" in window)) {
-    reveals.forEach(function (el) { el.classList.add("in"); });
+    rv.forEach(function (e) { e.classList.add("in"); });
   } else {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
       });
-    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.06 });
-    reveals.forEach(function (el) { io.observe(el); });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: .05 });
+    rv.forEach(function (e) { io.observe(e); });
   }
 
-  /* ── Rail: current section + progress meter ──────────────── */
-  var links = Array.prototype.slice.call(document.querySelectorAll(".rail a"));
-  var meter = document.getElementById("meter");
-  var targets = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
-
-  function onScroll() {
-    var mid = window.scrollY + window.innerHeight * 0.36;
-    var active = 0;
-    targets.forEach(function (t, i) { if (t && t.offsetTop <= mid) active = i; });
-    links.forEach(function (a, i) {
-      if (i === active) { a.setAttribute("aria-current", "true"); }
-      else { a.removeAttribute("aria-current"); }
+  /* ── Cursor ──────────────────────────────────────────────── */
+  var dot = document.querySelector(".cur"), ring = document.querySelector(".cur-r");
+  if (dot && !reduced && matchMedia("(hover:hover)").matches) {
+    var mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+    addEventListener("mousemove", function (e) {
+      mx = e.clientX; my = e.clientY;
+      dot.style.opacity = ring.style.opacity = 1;
+      dot.style.transform = "translate(" + mx + "px," + my + "px)";
+    }, { passive: true });
+    (function trail() {
+      rx += (mx - rx) * .16; ry += (my - ry) * .16;
+      ring.style.transform = "translate(" + rx + "px," + ry + "px)";
+      requestAnimationFrame(trail);
+    })();
+    document.querySelectorAll("a,.job,.leg").forEach(function (el) {
+      el.addEventListener("mouseenter", function () { ring.classList.add("hot"); });
+      el.addEventListener("mouseleave", function () { ring.classList.remove("hot"); });
     });
-    var max = document.body.scrollHeight - window.innerHeight;
-    if (meter) meter.style.height = (max > 0 ? Math.min(1, window.scrollY / max) * 100 : 0) + "%";
   }
-  var ticking = false;
-  window.addEventListener("scroll", function () {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(function () { onScroll(); ticking = false; });
-  }, { passive: true });
-  onScroll();
 
-  /* ── Hero: causal self-attention, and what the first token loses ──
-     Each row i is a query attending over keys 0..i. Scores combine a
-     recency bias, a couple of drifting "content" peaks, and a sink on
-     token 0 (a real, documented quirk of trained attention heads).
-     Softmax the row, normalise for display, read out alpha(t0).       */
-  var cv = document.getElementById("attn");
+  /* ── Rail ────────────────────────────────────────────────── */
+  var links = [].slice.call(document.querySelectorAll(".rail a"));
+  var secs = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+
+  /* ══ THE RIDGE ═══════════════════════════════════════════════
+     A skyline and a softmax distribution are the same shape: peaks
+     over a baseline. Each parallax layer is its own distribution of
+     Gaussian "mountains" pushed through softmax(s / T). Scrolling
+     raises T. The peaks flatten, the range becomes a plain, and the
+     readout shows the weight draining out of the tallest peak —
+     which is exactly what a long context does to an early token.  */
+  var cv = document.getElementById("ridge");
   if (!cv) return;
   var g = cv.getContext("2d");
-  var N = 32;
-  var elI = document.getElementById("r-i"),
-      elN = document.getElementById("r-n"),
-      elA = document.getElementById("r-a");
+  var W = 0, H = 0, T = 0.4, mouseX = .5, mouseY = .5;
 
-  var RAMP = [
-    [0.00,  12,  18,  27],
-    [0.25,  22,  52,  78],
-    [0.50,  92,  78,  88],
-    [0.78, 190, 124,  62],
-    [1.00, 245, 186,  95]
-  ];
-  function ramp(t) {
-    t = t < 0 ? 0 : t > 1 ? 1 : t;
-    for (var k = 1; k < RAMP.length; k++) {
-      if (t <= RAMP[k][0]) {
-        var a = RAMP[k - 1], b = RAMP[k];
-        var u = (t - a[0]) / (b[0] - a[0]);
-        return "rgb(" + Math.round(a[1] + (b[1] - a[1]) * u) + "," +
-                        Math.round(a[2] + (b[2] - a[2]) * u) + "," +
-                        Math.round(a[3] + (b[3] - a[3]) * u) + ")";
-      }
-    }
-    return "rgb(245,186,95)";
-  }
-
-  var peaks = [
-    { pos: 6,  amp: 1.5, w: 1.7, v: 0.011 },
-    { pos: 17, amp: 1.1, w: 2.4, v: -0.008 },
-    { pos: 26, amp: 0.9, w: 1.4, v: 0.006 }
+  var LAYERS = [
+    { y: .60, h: .30, col: "#3A3E68", n: 7,  seed: 11, par: .014, a: .95 },
+    { y: .70, h: .34, col: "#2A2F55", n: 6,  seed: 29, par: .026, a: 1 },
+    { y: .80, h: .36, col: "#1C2140", n: 5,  seed: 47, par: .042, a: 1 },
+    { y: .91, h: .34, col: "#121628", col2: "#0A0C16", n: 4, seed: 71, par: .062, a: 1 }
   ];
 
-  function row(i, t) {
-    var s = new Float64Array(i + 1), max = -1e9, j, p;
-    for (j = 0; j <= i; j++) {
-      var v = -0.055 * (i - j);          // recency bias
-      if (j === 0) v += 1.35;            // attention sink
-      for (var q = 0; q < peaks.length; q++) {
-        p = peaks[q];
-        var c = p.pos + Math.sin(t * p.v * 60) * 3.2;
-        var d = j - c;
-        v += p.amp * Math.exp(-(d * d) / (2 * p.w * p.w));
-      }
-      s[j] = v;
-      if (v > max) max = v;
-    }
-    var sum = 0;
-    for (j = 0; j <= i; j++) { s[j] = Math.exp(s[j] - max); sum += s[j]; }
-    for (j = 0; j <= i; j++) { s[j] /= sum; }
-    return s;
-  }
+  function fin(v, fb) { return isFinite(v) ? v : fb; }
 
-  var W = 0, cell = 0, pad = 0;
-  function size() {
-    var box = cv.parentElement.getBoundingClientRect();
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = Math.max(200, Math.floor(box.width - 28));
-    cv.style.width = W + "px";
-    cv.style.height = W + "px";
-    cv.width = Math.floor(W * dpr);
-    cv.height = Math.floor(W * dpr);
-    g.setTransform(dpr, 0, 0, dpr, 0, 0);
-    cell = W / N;
-    pad = Math.max(0.5, cell * 0.07);
-  }
+  function rnd(s) { var x = Math.sin(s * 12.9898) * 43758.5453; return x - Math.floor(x); }
 
-  var start = performance.now();
-  function frame(now) {
-    var t = (now - start) / 1000;
-    // The matrix is always fully drawn — the cursor is a reading guide that
-    // sweeps down it, not a fill boundary. Row 0 splits its whole budget on
-    // one token; row 31 splits it across thirty-two, and the first column
-    // visibly gives that share up on the way down.
-    var cyc = 16, ph = (t % cyc) / cyc;
-    var cur = reduced ? N - 1 : Math.min(N - 1, Math.floor((ph < 0.86 ? ph / 0.86 : 1) * N));
-
-    g.clearRect(0, 0, W, W);
-    g.fillStyle = "#0A0F16";
-    g.fillRect(0, 0, W, W);
-
-    var a0 = 1, i, j;
+  // softmax over Gaussian peaks, normalised so the tallest is 1
+  function profile(L, t, out) {
+    var N = out.length, i, k, mx = 0;
     for (i = 0; i < N; i++) {
-      var y = i * cell;
-
-      // masked region — drawn, so the square reads as a whole object
-      g.fillStyle = "rgba(30,41,56,.26)";
-      for (j = i + 1; j < N; j++) {
-        g.fillRect(j * cell + pad, y + pad, cell - pad * 2, cell - pad * 2);
+      var x = i / (N - 1), s = 0;
+      for (k = 0; k < L.n; k++) {
+        var pos = rnd(L.seed + k) * 1.15 - .07;
+        var amp = .55 + rnd(L.seed + k + 100) * .85;
+        var wid = .035 + rnd(L.seed + k + 200) * .075;
+        var drift = Math.sin(t * (.08 + rnd(L.seed + k + 300) * .12) + k) * .012;
+        var d = x - (pos + drift);
+        s += amp * Math.exp(-(d * d) / (2 * wid * wid));
       }
-
-      var a = row(i, reduced ? 0 : t);
-      if (i === cur) a0 = a[0];
-      g.globalAlpha = i === cur ? 1 : 0.72;
-      for (j = 0; j <= i; j++) {
-        // measured against an even split across the row, so a flat row reads
-        // mid-tone and a genuine peak reads hot
-        var u = Math.pow(Math.min(1, a[j] * (i + 1) / 3.0), 0.62);
-        g.fillStyle = ramp(u);
-        g.fillRect(j * cell + pad, y + pad, cell - pad * 2, cell - pad * 2);
-      }
-      g.globalAlpha = 1;
+      out[i] = s;
+      if (s > mx) mx = s;
     }
-
-    // cursor
-    var cy = cur * cell + cell + 0.5;
-    g.strokeStyle = "rgba(240,162,74,.5)";
-    g.lineWidth = 1;
-    g.beginPath(); g.moveTo(0, cy); g.lineTo(W, cy); g.stroke();
-
-    if (elI) elI.textContent = (cur < 10 ? "0" : "") + cur;
-    if (elN) elN.textContent = String(cur + 1);
-    if (elA) elA.textContent = (a0 * 100).toFixed(1) + "%";
-
-    if (!reduced) requestAnimationFrame(frame);
+    // temperature: divide the scores, re-exponentiate, renormalise
+    var m2 = 0;
+    for (i = 0; i < N; i++) { out[i] = Math.exp(out[i] / T); if (out[i] > m2) m2 = out[i]; }
+    var base = Math.exp(0 / T), den = m2 - base;
+    if (!(den > 1e-6)) {                      // fully degenerate: even plateau
+      for (i = 0; i < N; i++) { out[i] = .5; }
+      return out;
+    }
+    for (i = 0; i < N; i++) {
+      var u = (out[i] - base) / den;
+      out[i] = 0.13 + 0.87 * (u < 0 ? 0 : u > 1 ? 1 : u);   // never collapse flat
+    }
+    return out;
   }
 
-  size();
-  if (reduced) { frame(performance.now()); }
-  else { requestAnimationFrame(frame); }
+  var buf = new Float64Array(150);
 
-  var rt;
-  window.addEventListener("resize", function () {
-    clearTimeout(rt);
-    rt = setTimeout(function () { size(); if (reduced) frame(performance.now()); }, 140);
-  });
+  function sky() {
+    var sg = g.createLinearGradient(0, 0, 0, H);
+    // The warm band has to land ON the skyline (~.25-.70 of the frame),
+    // not below it, or the mountains eat the alpenglow entirely.
+    sg.addColorStop(0,   "#05070E");
+    sg.addColorStop(.26, "#0F1330");
+    sg.addColorStop(.44, "#2B2048");
+    sg.addColorStop(.57, "#663856");
+    sg.addColorStop(.67, "#AB6260");
+    sg.addColorStop(.76, "#DE9A69");
+    sg.addColorStop(.88, "#F2BE86");
+    sg.addColorStop(1,   "#F7D6A6");
+    g.fillStyle = sg;
+    g.fillRect(0, 0, W, H);
+
+    // sun, sinking as the temperature climbs
+    var sy = fin(H * (.52 + (T - .4) * .055), H * .52);
+    var sx = fin(W * (.70 + (mouseX - .5) * .03), W * .70);
+    var r = Math.max(1, fin(Math.min(W, H) * .085, 40));
+    var gl = g.createRadialGradient(sx, sy, 0, sx, sy, r * 5.5);
+    gl.addColorStop(0, "rgba(255,214,150,.55)");
+    gl.addColorStop(.3, "rgba(245,178,92,.16)");
+    gl.addColorStop(1, "rgba(245,178,92,0)");
+    g.fillStyle = gl; g.fillRect(0, 0, W, H);
+    g.beginPath(); g.arc(sx, sy, r, 0, 6.2832);
+    g.fillStyle = "rgba(255,226,178,.92)"; g.fill();
+
+    // stars in the upper band
+    for (var i = 0; i < 70; i++) {
+      var x = rnd(i * 3 + 1) * W, y = rnd(i * 7 + 2) * H * .42;
+      g.globalAlpha = .18 + rnd(i * 11 + 3) * .5;
+      g.fillStyle = "#EDE6FF";
+      g.fillRect(x, y, 1.4, 1.4);
+    }
+    g.globalAlpha = 1;
+  }
+
+  function draw(t) {
+    if (!isFinite(T) || T <= 0 || !(W > 0) || !(H > 0)) return;
+    g.clearRect(0, 0, W, H);
+    sky();
+    for (var l = 0; l < LAYERS.length; l++) {
+      var L = LAYERS[l];
+      var p = profile(L, t, buf);
+      var shift = fin((mouseX - .5) * W * L.par, 0);
+      var baseY = H * L.y, amp = H * L.h;
+
+      g.beginPath();
+      g.moveTo(-40, H + 10);
+      for (var i = 0; i < buf.length; i++) {
+        var x = -40 + (i / (buf.length - 1)) * (W + 80) + shift;
+        g.lineTo(x, baseY - p[i] * amp);
+      }
+      g.lineTo(W + 40, H + 10);
+      g.closePath();
+
+      if (L.col2) {
+        var lg = g.createLinearGradient(0, baseY - amp, 0, H);
+        lg.addColorStop(0, L.col); lg.addColorStop(1, L.col2);
+        g.fillStyle = lg;
+      } else { g.fillStyle = L.col; }
+      g.globalAlpha = L.a; g.fill(); g.globalAlpha = 1;
+
+      // snowlit rim on the two far ranges
+      if (l < 2) {
+        g.beginPath();
+        for (var j = 0; j < buf.length; j++) {
+          var x2 = -40 + (j / (buf.length - 1)) * (W + 80) + shift;
+          var y2 = baseY - p[j] * amp;
+          j ? g.lineTo(x2, y2) : g.moveTo(x2, y2);
+        }
+        g.strokeStyle = l === 0 ? "rgba(226,115,154,.34)" : "rgba(245,178,92,.22)";
+        g.lineWidth = 1.2; g.stroke();
+      }
+    }
+  }
+
+  var gT = document.getElementById("g-t"), gP = document.getElementById("g-p"),
+      gB = document.getElementById("g-bar"), gN = document.getElementById("g-note");
+
+  function readout() {
+    // peak share of a 32-way softmax at this temperature — a real number
+    var n = 32, top = Math.exp(2.2 / T), rest = (n - 1) * Math.exp(0 / T);
+    var share = top / (top + rest);
+    if (gT) gT.textContent = "T = " + T.toFixed(2);
+    if (gP) gP.textContent = share.toFixed(2);
+    if (gB) gB.style.width = Math.max(3, share * 100) + "%";
+    if (gN) gN.textContent = share > .55 ? "Sharp. One peak takes almost everything."
+                          : share > .18 ? "Spreading. The range is losing its summits."
+                          : "Flat. Every token gets a near-equal, tiny share.";
+  }
+
+  function resize() {
+    var d = Math.min(devicePixelRatio || 1, 2);
+    W = innerWidth || 1;
+    H = cv.parentElement.offsetHeight || innerHeight || 1;
+    cv.width = W * d; cv.height = H * d;
+    cv.style.width = W + "px"; cv.style.height = H + "px";
+    g.setTransform(d, 0, 0, d, 0, 0);
+  }
+
+  addEventListener("mousemove", function (e) {
+    mouseX = fin(e.clientX / (innerWidth || 1), .5);
+    mouseY = fin(e.clientY / (innerHeight || 1), .5);
+  }, { passive: true });
+
+  function onScroll() {
+    var vh = innerHeight || 1;               // never divide by a zero viewport
+    var span = (cv.parentElement.offsetHeight || vh) * .8;
+    var p = scrollY / (span || vh);
+    if (!isFinite(p)) p = 0;
+    p = p < 0 ? 0 : p > 1 ? 1 : p;
+    T = 0.4 + p * 2.1;                       // scrolling heats the distribution
+    readout();
+    // Belt and braces: anything at or above the fold is shown regardless
+    // of whether the observer fired. Hidden content is never acceptable.
+    for (var v = 0; v < rv.length; v++) {
+      if (!rv[v].classList.contains("in") &&
+          rv[v].getBoundingClientRect().top < innerHeight * .98) {
+        rv[v].classList.add("in");
+      }
+    }
+    var mid = scrollY + innerHeight * .36, act = 0;
+    secs.forEach(function (s, i) { if (s && s.offsetTop <= mid) act = i; });
+    links.forEach(function (a, i) {
+      i === act ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current");
+    });
+  }
+  var tick = false;
+  addEventListener("scroll", function () {
+    if (tick) return; tick = true;
+    requestAnimationFrame(function () { onScroll(); tick = false; });
+  }, { passive: true });
+  addEventListener("resize", function () { resize(); if (reduced) draw(0); }, { passive: true });
+
+  resize(); onScroll();
+  if (reduced) { draw(0); }
+  else {
+    var warned = false;
+    (function loop(now) {
+      try { draw(now / 1000); }
+      catch (err) {
+        if (!warned) { warned = true; console.warn("ridge: frame skipped —", err && err.message); }
+      }
+      requestAnimationFrame(loop);          // keep going regardless
+    })(0);
+  }
 })();
 </script>
 </body>
