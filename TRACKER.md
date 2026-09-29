@@ -3,8 +3,8 @@
 Status legend: `[x]` done · `[ ]` to do · `[~]` in progress
 
 ## Phase 1 — Foundation ✅
-- [x] Pick a stack: plain HTML/CSS/JS, one file, no build step
-- [x] Visual concept: softmax ridgeline hero
+- [x] Pick a stack: plain HTML/CSS/JS, no build step (index.html + styles.css + script.js since 2026-09-29)
+- [x] Visual concept: softmax ridgeline hero (replaced 2026-09-29 by the cursor-tracking portrait hero)
 - [x] Palette: white + pastel pinks/lavender/peach, raspberry as the only bold accent — 2026-09-28
 - [x] Sections: hero, the question, path, work, toolkit, life, contact
 - [x] RentScout AI case study
@@ -12,21 +12,21 @@ Status legend: `[x]` done · `[ ]` to do · `[~]` in progress
 - [x] GitHub link in Contact — 2026-09-28
 
 ## Phase 2 — Content (needs you)
-- [ ] **Résumé** — save as `assets/resume.pdf`; everything below gets faster once it's in
-- [ ] Project Two — name, problem, stack, one decision you'd defend in an interview
+- [~] **Résumé** — content is on the site; save a clean PDF as `assets/resume.pdf` (remove the hidden "Please select this resume…" line first)
+- [x] Project Two — GiveSync (Food Link Society) — 2026-09-29
 - [ ] Project Three — coursework is fine (a maths-minor project fits the story best)
-- [ ] LinkedIn URL
+- [x] LinkedIn URL — 2026-09-29
 - [ ] YouTube channel URL (or remove the row)
 - [ ] Upper-year maths courses (Toolkit section)
 - [ ] Confirm RAG level: "learning" or "used in a project"
 - [ ] RentScout: live demo link + repo link on the case study
-- [ ] Photo? (optional — `assets/`)
+- [x] Photo — illustrated portrait in the hero, head follows the cursor — 2026-09-29
 
 ## Phase 3 — Polish
-- [ ] Link to résumé PDF from the hero and Contact
-- [ ] Social preview: `og:title`, `og:description`, `og:image` (so links look good on LinkedIn)
-- [ ] Favicon
-- [ ] Check on a phone (375px) and with reduced motion on
+- [x] Link to résumé PDF from the hero and Contact (button waits for `assets/resume.pdf`) — 2026-09-29
+- [~] Social preview: tags + image added; `og:image` needs the full URL after deploy — 2026-09-29
+- [x] Favicon — 2026-09-29
+- [~] Check on a phone (375px) ✓ — reduced motion still to check
 - [ ] Lighthouse pass: performance, accessibility ≥ 95
 - [ ] Proofread every section out loud
 
@@ -44,3 +44,4 @@ Status legend: `[x]` done · `[ ]` to do · `[~]` in progress
 - 2026-09-10 — Site built; ridgeline redesign
 - 2026-09-28 — Tracker added; RentScout copy updated; GitHub linked
 - 2026-09-28 — Recoloured from dark alpenglow to white and baby-pink pastels
+- 2026-09-29 — Rebuilt from the Framer design: cursor-tracking portrait hero, typing name, experience, education, tech stack from the résumé; "Software Engineer" only

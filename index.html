@@ -3,934 +3,273 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#FFFBFC">
-<title>Vanshika Shyam</title>
-<meta name="description" content="Computer Science and Mathematics, Vancouver BC. A ridgeline drawn from a softmax distribution — Shimla to Vancouver, and the question that started it.">
+<meta name="theme-color" content="#F7E4E9">
+<title>Vanshika Shyam · Software Engineer</title>
+<meta name="description" content="Portfolio of Vanshika Shyam, a software engineer and Computer Science & Mathematics student at Trinity Western University building full-stack products, backend systems and AI-powered apps like RentScout AI.">
+
+<!-- Link previews (LinkedIn, iMessage, Slack). Swap in the full URL once the site is deployed. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vanshika Shyam · Software Engineer">
+<meta property="og:description" content="Full-stack products, backend systems and APIs. Experience, projects, tech stack and résumé.">
+<meta property="og:image" content="assets/social-preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Fraunces:ital,opsz,wght@1,9..144,300..500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
-<style>
-/* ══════════════════════════════════════════════════════════════
-   ALPENGLOW
-   The light on Himalayan snow at dawn: indigo night, rose, gold.
-   One idea runs through everything — a ridgeline and a softmax
-   distribution are the same shape. Raise the temperature and the
-   mountains flatten. That is the hero, and it is also the story.
-   ══════════════════════════════════════════════════════════════ */
-:root{
-  color-scheme: light;
-
-  /* Mostly pastel: white, blush, baby pink, lavender, peach.
-     --gold is the one bold colour (raspberry) — accents only. */
-  --night:#FFFBFC;
-  --deep:#FFF1F5;
-  --indigo:#FDE4EC;
-  --violet:#C9B3EC;
-  --ridge:#F6CFDD;
-  --rose:#EE8FB4;
-  --gold:#D6457E;
-  --snow:#3B2A35;
-  --haze:#77606D;
-  --haze-dim:#957B89;
-  --line:rgba(214,120,160,.24);
-  --line-soft:rgba(214,120,160,.12);
-
-  --f-disp:"Syne","Helvetica Neue",Arial,sans-serif;
-  --f-ed:"Fraunces","Iowan Old Style",Georgia,serif;
-  --f-body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
-
-  --gut:clamp(20px,4.4vw,72px);
-  --s1:8px; --s2:16px; --s3:28px; --s4:48px; --s5:84px; --s6:132px;
-  --ease:cubic-bezier(.16,1,.3,1);
-}
-
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-
-body{
-  margin:0;
-  background:var(--night);
-  color:var(--snow);
-  font-family:var(--f-body);
-  font-size:17px;
-  line-height:1.62;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-
-/* Film grain — keeps the flat gradients from looking like plastic. */
-body::after{
-  content:"";
-  position:fixed; inset:-50%; z-index:900; pointer-events:none;
-  opacity:.10; mix-blend-mode:multiply;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='220' height='220' filter='url(%23n)' opacity='.5'/></svg>");
-  animation:grain 7s steps(6) infinite;
-}
-@keyframes grain{
-  0%,100%{transform:translate(0,0)}
-  20%{transform:translate(-4%,3%)}
-  40%{transform:translate(3%,-4%)}
-  60%{transform:translate(-3%,-3%)}
-  80%{transform:translate(4%,2%)}
-}
-
-/* ── Load curtain: pure CSS, so it lifts even if JS never runs ── */
-.curtain{
-  position:fixed; inset:0; z-index:1000;
-  background:var(--night);
-  display:flex; align-items:center; justify-content:center;
-  animation:lift 1.45s var(--ease) .75s forwards;
-}
-.curtain span{
-  font-family:var(--f-mono); font-size:.72rem; letter-spacing:.42em;
-  text-transform:uppercase; color:var(--haze-dim);
-  animation:blink 1.1s ease-in-out infinite;
-}
-@keyframes lift{ to{ transform:translateY(-101%); pointer-events:none; visibility:hidden } }
-@keyframes blink{ 50%{opacity:.25} }
-
-/* ── Cursor ─────────────────────────────────────────────────── */
-.cur,.cur-r{position:fixed; top:0; left:0; z-index:950; pointer-events:none; border-radius:50%; opacity:0}
-.cur{width:6px; height:6px; background:var(--gold); margin:-3px 0 0 -3px}
-.cur-r{
-  width:34px; height:34px; margin:-17px 0 0 -17px;
-  border:1px solid rgba(238,143,180,.7);
-  transition:width .35s var(--ease), height .35s var(--ease), margin .35s var(--ease), background .35s var(--ease), border-color .35s var(--ease);
-}
-.cur-r.hot{width:66px; height:66px; margin:-33px 0 0 -33px; background:rgba(214,69,126,.08); border-color:rgba(214,69,126,.6)}
-@media (hover:none),(pointer:coarse){ .cur,.cur-r{display:none} }
-
-/* ── Type ───────────────────────────────────────────────────── */
-h1,h2,h3{margin:0; font-weight:400; text-wrap:balance}
-
-.kinetic{
-  font-family:var(--f-disp); font-weight:800;
-  letter-spacing:-.045em; line-height:.84;
-  text-transform:uppercase;
-}
-
-.h2{
-  font-family:var(--f-disp); font-weight:800;
-  font-size:clamp(2.4rem,7.4vw,5.4rem);
-  letter-spacing:-.042em; line-height:.92; text-transform:uppercase;
-}
-.h2 .tint{
-  background:linear-gradient(96deg,var(--gold),var(--rose) 62%,var(--violet));
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
-
-.ed{font-family:var(--f-ed); font-style:italic; font-weight:400}
-
-p{margin:0; max-width:62ch}
-.dim{color:var(--haze)}
-.stack{display:flex; flex-direction:column; gap:var(--s3)}
-
-.eyebrow{
-  font-family:var(--f-mono); font-size:.68rem; letter-spacing:.28em;
-  text-transform:uppercase; color:var(--haze-dim); margin:0;
-  display:flex; align-items:center; gap:12px;
-}
-.eyebrow::before{content:""; width:26px; height:1px; background:var(--gold); flex:none}
-
-a{color:inherit}
-a:focus-visible,button:focus-visible{outline:2px solid var(--gold); outline-offset:4px}
-
-.todo{
-  color:var(--gold); border-bottom:1px dashed rgba(214,69,126,.45);
-  font-family:var(--f-mono); font-size:.86em; cursor:help;
-}
-
-.wrap{max-width:1320px; margin:0 auto; padding-inline:var(--gut)}
-section{position:relative; z-index:2}
-
-/* ── Rail ───────────────────────────────────────────────────── */
-.rail{
-  position:fixed; right:var(--gut); top:50%; transform:translateY(-50%);
-  z-index:120; display:flex; flex-direction:column; gap:14px; align-items:flex-end;
-}
-@media (max-width:900px){ .rail{display:none} }
-.rail a{
-  display:flex; align-items:center; gap:10px; text-decoration:none;
-  font-family:var(--f-mono); font-size:.6rem; letter-spacing:.2em;
-  text-transform:uppercase; color:transparent; transition:color .3s var(--ease);
-}
-.rail i{width:16px; height:2px; background:var(--haze-dim); display:block; transition:all .4s var(--ease)}
-.rail a:hover{color:var(--haze)}
-.rail a[aria-current="true"]{color:var(--gold)}
-.rail a[aria-current="true"] i{width:40px; background:var(--gold)}
-
-/* ══ HERO ═══════════════════════════════════════════════════ */
-.hero{
-  position:relative; min-height:94vh;
-  display:flex; flex-direction:column; justify-content:flex-end;
-  overflow:hidden; padding-bottom:var(--s4);
-}
-#ridge{
-  position:absolute; inset:0; width:100%; height:100%;
-  display:block; z-index:0;
-}
-.hero .wrap{position:relative; z-index:3; width:100%}
-
-.hero-loc{
-  margin-bottom:clamp(14px,2.2vw,26px);
-  opacity:0; animation:fadeUp .9s var(--ease) .8s forwards;
-}
-.hero-name{
-  font-size:clamp(2.35rem,9.6vw,146px);
-  margin-bottom:clamp(14px,2vw,26px);
-}
-/* Each letter wipes up from its own clipping box. */
-.ln{display:block; overflow:hidden; white-space:nowrap}
-.ln b{display:inline-block; font-weight:800; transform:translateY(104%); animation:rise 1.15s var(--ease) forwards}
-@keyframes rise{ to{transform:translateY(0)} }
-.hero-name .two b{color:var(--haze)}
-
-.hero-foot{
-  display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
-  gap:var(--s3); padding-top:var(--s3); border-top:1px solid var(--line);
-  opacity:0; animation:fadeUp 1s var(--ease) 1.5s forwards;
-}
-@keyframes fadeUp{ from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none} }
-
-.hero-say{font-size:clamp(1.05rem,2.1vw,1.42rem); max-width:33ch; line-height:1.44; color:var(--snow)}
-.hero-say .ed{color:var(--gold)}
-
-.gauge{display:flex; flex-direction:column; gap:7px; font-family:var(--f-mono); font-size:.68rem; letter-spacing:.09em; color:var(--haze-dim); min-width:236px}
-.gauge div{display:flex; justify-content:space-between; gap:var(--s2)}
-.gauge b{font-weight:500; color:var(--gold); font-variant-numeric:tabular-nums}
-.gauge .bar{height:2px; background:var(--line); position:relative; margin-top:3px}
-.gauge .bar i{position:absolute; inset:0 auto 0 0; width:8%; background:linear-gradient(90deg,var(--gold),var(--rose)); display:block}
-.gauge .note{display:block; color:var(--haze-dim); line-height:1.5; letter-spacing:.02em; max-width:30ch}
-
-/* ── Marquee ────────────────────────────────────────────────── */
-.tick{
-  border-block:1px solid var(--line); overflow:hidden; padding-block:18px;
-  background:var(--deep); position:relative; z-index:4;
-}
-.tick-in{display:flex; width:max-content; animation:slide 34s linear infinite}
-.tick:hover .tick-in{animation-play-state:paused}
-@keyframes slide{ to{transform:translateX(-50%)} }
-.tick span{
-  font-family:var(--f-disp); font-weight:700; font-size:clamp(1.1rem,2.4vw,1.75rem);
-  text-transform:uppercase; letter-spacing:-.02em; color:var(--haze-dim);
-  padding-inline:26px; white-space:nowrap;
-}
-.tick span.g{color:var(--gold)}
-.tick span.r{color:var(--rose)}
-
-/* ── Reveal ─────────────────────────────────────────────────── */
-.js .rv{opacity:0; transform:translateY(34px)}
-.js .rv.in{opacity:1; transform:none; transition:opacity 1s var(--ease), transform 1s var(--ease)}
-
-/* ══ STORY ══════════════════════════════════════════════════ */
-.sec{padding-block:var(--s6)}
-.sec-head{margin-bottom:var(--s5); display:flex; flex-direction:column; gap:var(--s3)}
-
-.story{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:clamp(34px,5vw,86px); align-items:start}
-@media (max-width:980px){ .story{grid-template-columns:1fr} }
-
-.quote{
-  font-family:var(--f-ed); font-style:italic; font-weight:300;
-  font-size:clamp(1.8rem,4.4vw,3.1rem); line-height:1.16; letter-spacing:-.02em;
-  color:var(--snow); margin:var(--s3) 0; max-width:20ch;
-}
-.quote em{font-style:normal; color:var(--gold)}
-
-.figure{
-  border:1px solid var(--line); background:linear-gradient(170deg,#FFF1F5,#F7F0FC);
-  padding:var(--s4) var(--s3) var(--s3); display:flex; flex-direction:column; gap:var(--s3);
-  position:sticky; top:var(--s4);
-}
-@media (max-width:980px){ .figure{position:static} }
-.figure svg{display:block; width:100%; height:auto; overflow:visible}
-.cap{font-family:var(--f-mono); font-size:.66rem; color:var(--haze-dim); line-height:1.72; letter-spacing:.02em}
-.axl{stroke:var(--line); stroke-width:1}
-.axg{stroke:var(--line-soft); stroke-width:1}
-.axt{font-family:var(--f-mono); font-size:10px; fill:var(--haze-dim); letter-spacing:.05em}
-.axt.hot{fill:var(--gold)}
-
-/* ══ PATH — big numerals, alternating, parallax ═════════════ */
-.path{display:flex; flex-direction:column; gap:var(--s5)}
-.leg{display:grid; grid-template-columns:clamp(90px,15vw,220px) minmax(0,1fr); gap:clamp(20px,4vw,58px); align-items:start}
-@media (max-width:760px){ .leg{grid-template-columns:1fr; gap:var(--s2)} }
-.leg .yr{
-  font-family:var(--f-disp); font-weight:800; font-size:clamp(2.2rem,6.4vw,4.6rem);
-  line-height:.85; letter-spacing:-.05em; color:transparent;
-  -webkit-text-stroke:1px var(--haze-dim);
-  transition:color .5s var(--ease), -webkit-text-stroke-color .5s var(--ease);
-}
-.leg:hover .yr{color:var(--gold); -webkit-text-stroke-color:transparent}
-.leg-b{display:flex; flex-direction:column; gap:12px; border-top:1px solid var(--line); padding-top:var(--s2)}
-.leg-b h3{font-family:var(--f-disp); font-weight:700; font-size:clamp(1.25rem,2.7vw,1.85rem); letter-spacing:-.028em; line-height:1.12}
-
-/* ══ WORK ═══════════════════════════════════════════════════ */
-.work{display:flex; flex-direction:column; border-top:1px solid var(--line)}
-.job{
-  position:relative; border-bottom:1px solid var(--line);
-  padding-block:var(--s4); overflow:hidden;
-  transition:padding .5s var(--ease);
-}
-.job::before{
-  content:""; position:absolute; inset:0; z-index:0;
-  background:linear-gradient(100deg,rgba(248,200,220,.45),rgba(225,210,245,.3) 55%,transparent);
-  transform:scaleX(0); transform-origin:left; transition:transform .75s var(--ease);
-}
-.job:hover::before{transform:scaleX(1)}
-.job > *{position:relative; z-index:1}
-.job-top{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:var(--s2)}
-.job-name{
-  font-family:var(--f-disp); font-weight:800; text-transform:uppercase;
-  font-size:clamp(1.9rem,6.2vw,4.4rem); letter-spacing:-.045em; line-height:.94;
-  transition:transform .6s var(--ease);
-}
-.job:hover .job-name{transform:translateX(clamp(8px,1.6vw,22px))}
-.job-kind{font-family:var(--f-mono); font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--haze-dim)}
-.job-body{
-  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:clamp(22px,3.4vw,56px); margin-top:var(--s3);
-}
-@media (max-width:860px){ .job-body{grid-template-columns:1fr} }
-.job.muted .job-name{color:var(--haze-dim)}
-
-.chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:var(--s2)}
-.chip{font-family:var(--f-mono); font-size:.63rem; letter-spacing:.07em; color:var(--haze); border:1px solid var(--line); padding:4px 10px; white-space:nowrap}
-
-.facts{display:flex; flex-direction:column}
-.fact{display:grid; grid-template-columns:132px minmax(0,1fr); gap:var(--s2); padding-block:10px; border-bottom:1px solid var(--line-soft); font-size:.92rem}
-@media (max-width:560px){ .fact{grid-template-columns:1fr; gap:2px} }
-.fact dt{font-family:var(--f-mono); font-size:.64rem; letter-spacing:.13em; text-transform:uppercase; color:var(--haze-dim); padding-top:.4em}
-.fact dd{margin:0; color:var(--haze)}
-
-.callout{
-  border-left:2px solid var(--rose); padding:var(--s2) 0 var(--s2) var(--s3);
-  display:flex; flex-direction:column; gap:11px; margin-top:var(--s2);
-}
-.callout .eyebrow{color:var(--rose)}
-.callout .eyebrow::before{background:var(--rose)}
-
-/* ══ KIT ════════════════════════════════════════════════════ */
-.kit{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:var(--s4) var(--s3)}
-.kit-c{display:flex; flex-direction:column; gap:12px}
-.kit-c h3{font-family:var(--f-mono); font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:500}
-.kit-c ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px}
-.kit-c li{color:var(--haze); font-size:.94rem; border-bottom:1px solid var(--line-soft); padding-bottom:8px}
-
-/* ══ LIFE ═══════════════════════════════════════════════════ */
-.life{display:grid; grid-template-columns:repeat(auto-fit,minmax(258px,1fr)); gap:var(--s4) var(--s3)}
-.li{display:flex; flex-direction:column; gap:12px}
-.li .no{font-family:var(--f-disp); font-weight:800; font-size:2.7rem; line-height:1; letter-spacing:-.05em; color:transparent; -webkit-text-stroke:1px var(--rose)}
-.li h3{font-family:var(--f-disp); font-weight:700; font-size:1.22rem; letter-spacing:-.024em}
-
-/* ══ CONTACT ════════════════════════════════════════════════ */
-.links{display:flex; flex-direction:column; border-top:1px solid var(--line)}
-.lk{
-  display:flex; align-items:baseline; justify-content:space-between; gap:var(--s3);
-  padding-block:var(--s3); border-bottom:1px solid var(--line); text-decoration:none;
-  transition:padding-left .55s var(--ease);
-}
-.lk .w{
-  font-family:var(--f-disp); font-weight:800; text-transform:uppercase;
-  font-size:clamp(1.6rem,5vw,3.4rem); letter-spacing:-.04em; line-height:1;
-  transition:color .4s var(--ease);
-}
-.lk .a{font-family:var(--f-mono); font-size:.7rem; color:var(--haze-dim); text-align:right; letter-spacing:.05em}
-.lk:hover{padding-left:clamp(10px,2vw,28px)}
-.lk:hover .w{color:var(--gold)}
-.lk:hover .a{color:var(--haze)}
-
-footer{
-  padding-block:var(--s4) var(--s5);
-  font-family:var(--f-mono); font-size:.65rem; color:var(--haze-dim); letter-spacing:.07em;
-  display:flex; flex-wrap:wrap; gap:var(--s1) var(--s3); justify-content:space-between;
-}
-
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  .js .rv{opacity:1; transform:none}
-  .ln b{transform:none; animation:none}
-  .hero-foot{opacity:1; animation:none}
-  .curtain{display:none}
-  .tick-in{animation:none}
-  body::after{animation:none}
-  *{transition-duration:.01ms !important}
-}
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="preload" as="image" href="assets/pose-sheet.webp">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="curtain" aria-hidden="true"><span>softmax &middot; loading</span></div>
-<div class="cur" aria-hidden="true"></div>
-<div class="cur-r" aria-hidden="true"></div>
+<a class="skip" href="#about">Skip to content</a>
 
-<nav class="rail" aria-label="Sections">
-  <a href="#top"><span>top</span><i></i></a>
-  <a href="#question"><span>question</span><i></i></a>
-  <a href="#path"><span>path</span><i></i></a>
-  <a href="#work"><span>work</span><i></i></a>
-  <a href="#kit"><span>toolkit</span><i></i></a>
-  <a href="#life"><span>offline</span><i></i></a>
-  <a href="#contact"><span>contact</span><i></i></a>
+<nav class="nav" aria-label="Main">
+  <a href="#about">About</a>
+  <a href="#experience">Experience</a>
+  <a href="#work">Work</a>
+  <a href="#contact">Contact</a>
 </nav>
 
-<!-- ══ HERO ══════════════════════════════════════════════════ -->
+<!-- ─── Hero: the head and eyes follow the cursor ─────────────────────── -->
 <header class="hero" id="top">
-  <canvas id="ridge" aria-label="An animated Himalayan ridgeline drawn from a softmax probability distribution. As the page scrolls the temperature rises and the peaks flatten toward a plain."></canvas>
-  <div class="wrap">
-
-    <p class="eyebrow hero-loc">Shimla, Himachal Pradesh &nbsp;&rarr;&nbsp; Vancouver, British Columbia</p>
-
-    <h1 class="hero-name kinetic" aria-label="Vanshika Shyam">
-      <span class="ln one" aria-hidden="true"
-        ><b style="animation-delay:.95s">V</b><b style="animation-delay:1.00s">A</b><b style="animation-delay:1.05s">N</b><b style="animation-delay:1.10s">S</b><b style="animation-delay:1.15s">H</b><b style="animation-delay:1.20s">I</b><b style="animation-delay:1.25s">K</b><b style="animation-delay:1.30s">A</b></span>
-      <span class="ln two" aria-hidden="true"
-        ><b style="animation-delay:1.16s">S</b><b style="animation-delay:1.21s">H</b><b style="animation-delay:1.26s">Y</b><b style="animation-delay:1.31s">A</b><b style="animation-delay:1.36s">M</b></span>
-    </h1>
-
-    <div class="hero-foot">
-      <p class="hero-say">
-        Computer Science &amp; Mathematics. I build software around real problems,
-        and I&rsquo;m working my way down to <span class="ed">the mathematics underneath
-        the models</span> I use every day.
-      </p>
-
-      <div class="gauge" aria-hidden="true">
-        <div><span>softmax(s / T)</span><b id="g-t">T&nbsp;=&nbsp;0.40</b></div>
-        <div><span>peak weight</span><b id="g-p">0.94</b></div>
-        <div class="bar"><i id="g-bar"></i></div>
-        <span class="note" id="g-note">Sharp. One peak takes almost everything.</span>
-      </div>
+  <div class="hero-art">
+    <img class="hero-portrait" src="assets/portrait.jpg" alt="Illustrated portrait of Vanshika" width="1448" height="1086" fetchpriority="high">
+    <!-- 7×5 grid of head/eye poses; script.js slides the right one into view -->
+    <div class="hero-patch" aria-hidden="true">
+      <img class="hero-sheet" src="assets/pose-sheet.webp" alt="" draggable="false">
     </div>
+  </div>
 
+  <div class="hero-intro">
+    <p class="badge"><span class="dot"></span>Open to software engineering roles</p>
+    <p class="greeting">Hi, I'm</p>
+    <!-- script.js types the name out; screen readers get it whole from aria-label -->
+    <h1 class="script typed" aria-label="Vanshika" data-text="Vanshika"><span class="typed-text" aria-hidden="true">Vanshika</span><span class="caret" aria-hidden="true"></span></h1>
+    <p class="tagline">I build intelligent digital experiences.</p>
+    <div class="buttons">
+      <a class="btn btn-solid" href="#resume">Resume ↗</a>
+      <a class="btn" href="#contact">Let's talk</a>
+    </div>
   </div>
 </header>
 
-<div class="tick" aria-hidden="true">
-  <div class="tick-in">
-    <span>Shimla &rarr; Vancouver</span><span class="g">&#10022;</span>
-    <span>Causal attention</span><span class="r">&#10022;</span>
-    <span>Linear algebra</span><span class="g">&#10022;</span>
-    <span>FastAPI</span><span class="r">&#10022;</span>
-    <span>Caf&eacute; rankings</span><span class="g">&#10022;</span>
-    <span>Softmax</span><span class="r">&#10022;</span>
-    <span>Shimla &rarr; Vancouver</span><span class="g">&#10022;</span>
-    <span>Causal attention</span><span class="r">&#10022;</span>
-    <span>Linear algebra</span><span class="g">&#10022;</span>
-    <span>FastAPI</span><span class="r">&#10022;</span>
-    <span>Caf&eacute; rankings</span><span class="g">&#10022;</span>
-    <span>Softmax</span><span class="r">&#10022;</span>
-  </div>
-</div>
+<main>
 
-<div class="wrap">
-
-<!-- ══ QUESTION ══════════════════════════════════════════════ -->
-<section class="sec" id="question">
-  <div class="sec-head rv">
-    <p class="eyebrow">01 &mdash; where this started</p>
-    <h2 class="h2">It kept<br><span class="tint">forgetting.</span></h2>
-  </div>
-
-  <div class="story">
-    <div class="stack rv">
-      <p>
-        I started my Computer Science degree in 2023, the same year these tools landed
-        in front of me. Before that I&rsquo;d never had anything like them. They were genuinely
-        useful &mdash; for studying, for picking up skills faster than a textbook would let me,
-        for getting unstuck at 1&nbsp;a.m.
-      </p>
-      <p class="dim">
-        But something happened in the long conversations. Past a certain point the answers
-        went strange. It would contradict what it had told me an hour earlier, lose the
-        thread of what we were building, get confidently wrong about things it had been
-        right about at the top of the chat.
-      </p>
-      <p>
-        Most people close the tab and open a fresh one. I wanted to know
-        <em>what had actually changed</em> between the good answers and the bad ones.
-      </p>
-
-      <blockquote class="quote">
-        Attention is a <em>probability distribution.</em> A distribution over more things is a thinner one.
-      </blockquote>
-
-      <p class="dim">
-        Every token competes for a fixed budget of attention &mdash; softmax normalises the row
-        to sum to one. Add more context and every earlier token&rsquo;s share shrinks. The
-        instruction you gave at the start isn&rsquo;t deleted. It&rsquo;s <strong>diluted</strong>.
-      </p>
-      <p class="dim">
-        That&rsquo;s the simplified version, and I know it. Real degradation is also positional
-        encodings extrapolating past their trained range, quantisation error compounding in
-        a long KV cache, and instruction drift. But the softmax intuition was the door in,
-        and I&rsquo;ve been reading through it ever since.
-      </p>
-      <p>
-        It settled something I&rsquo;d been carrying since I picked my degree: I didn&rsquo;t want to
-        only <em>use</em> these things. I wanted to be able to explain them.
-      </p>
+<!-- ─── 01 About ─────────────────────────────────────────────────────── -->
+<section id="about" class="section">
+  <p class="label">01 — About</p>
+  <div class="about reveal">
+    <div>
+      <h2 class="about-title">I'm <span class="script">Vanshika Shyam</span>.</h2>
+      <div class="pills"><span class="pill">Software Engineer</span></div>
+      <p class="lead">Computer Science &amp; Mathematics. I build software around real problems, and I'm working my way down to the mathematics underneath the models I use every day.</p>
+      <p class="body muted">I started my degree in 2023, the same year AI tools landed in front of me. They were genuinely useful, until long conversations started going strange: contradicting themselves, losing the thread. Most people open a fresh tab. I wanted to know what had actually changed.</p>
+      <p class="body muted">That question pulled me into attention, retrieval and a mathematics minor. I don't only want to use these systems. I want to be able to explain them, and to ship things with them that people can actually rely on.</p>
     </div>
-
-    <div class="figure rv">
-      <svg viewBox="0 0 660 300" role="img" aria-label="With uniform scores the softmax share of a single token falls as one over n: 12.5 percent at 8 tokens, 0.05 percent at 2048.">
-        <line class="axg" x1="70" y1="30" x2="620" y2="30"></line>
-        <line class="axg" x1="70" y1="74" x2="620" y2="74"></line>
-        <line class="axg" x1="70" y1="162" x2="620" y2="162"></line>
-        <line class="axl" x1="70" y1="250" x2="620" y2="250"></line>
-        <line class="axl" x1="70" y1="30" x2="70" y2="250"></line>
-        <text class="axt" x="62" y="34" text-anchor="end">12.5%</text>
-        <text class="axt" x="62" y="78" text-anchor="end">10%</text>
-        <text class="axt" x="62" y="166" text-anchor="end">5%</text>
-        <text class="axt" x="62" y="254" text-anchor="end">0%</text>
-        <text class="axt" x="70" y="270" text-anchor="middle">8</text>
-        <text class="axt" x="253" y="270" text-anchor="middle">64</text>
-        <text class="axt" x="437" y="270" text-anchor="middle">512</text>
-        <text class="axt" x="620" y="270" text-anchor="middle">4096</text>
-        <text class="axt" x="345" y="291" text-anchor="middle">context length n (tokens, log scale)</text>
-        <defs>
-          <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#EE8FB4" stop-opacity=".35"></stop>
-            <stop offset="1" stop-color="#C9B3EC" stop-opacity="0"></stop>
-          </linearGradient>
-        </defs>
-        <path fill="url(#fade)" d="M70,30 L131,140 L192,195 L253,222 L314,236 L376,243 L437,247 L498,248 L559,249 L620,250 L70,250 Z"></path>
-        <path fill="none" stroke="#D6457E" stroke-width="2.2" stroke-linejoin="round"
-              d="M70,30 L131,140 L192,195 L253,222 L314,236 L376,243 L437,247 L498,248 L559,249 L620,250"></path>
-        <circle cx="70" cy="30" r="4" fill="#D6457E"></circle>
-        <text class="axt hot" x="82" y="27">n = 8 &rarr; 12.50% each</text>
-        <circle cx="559" cy="249" r="4" fill="#B195DE"></circle>
-        <text class="axt hot" x="551" y="238" text-anchor="end" style="fill:#9C7BD0">n = 2048 &rarr; 0.05% each</text>
-      </svg>
-      <p class="cap">
-        &alpha;&#7522; = exp(s&#7522;) / &Sigma;&#11388; exp(s&#11388;). Hold the scores equal and every token&rsquo;s
-        share is exactly 1/n. Real attention is sharper than uniform &mdash; that is the point of
-        it &mdash; but the ceiling falls the same way, and nothing you said early on is competing
-        on equal footing by token two thousand.
-      </p>
-    </div>
+    <dl class="card facts">
+      <div><dt class="kicker">Based in</dt><dd>Langley, BC · Metro Vancouver · from Shimla, India</dd></div>
+      <div><dt class="kicker">Studying</dt><dd>BSc Computer Science, Minor in Mathematics · Trinity Western University</dd></div>
+      <div><dt class="kicker">Focus</dt><dd>Full-stack software engineering: backend systems, APIs and AI-powered products</dd></div>
+      <div><dt class="kicker">Currently</dt><dd>Co-founding CanServe AI and building RentScout's Tenancy Act assistant</dd></div>
+    </dl>
   </div>
 </section>
 
-<!-- ══ PATH ══════════════════════════════════════════════════ -->
-<section class="sec" id="path">
-  <div class="sec-head rv">
-    <p class="eyebrow">02 &mdash; how I got here</p>
-    <h2 class="h2">A fairly<br><span class="tint">indirect line.</span></h2>
-  </div>
-
-  <div class="path">
-    <div class="leg rv"><div class="yr">HILLS</div><div class="leg-b">
-      <h3>Growing up in Shimla, Himachal Pradesh</h3>
-      <p class="dim">School in the mountains, and a certainty that whatever came next would involve computers &mdash; without much idea which part of &ldquo;computers&rdquo; that meant.</p>
-    </div></div>
-
-    <div class="leg rv"><div class="yr">2023</div><div class="leg-b">
-      <h3>Moving to Vancouver, choosing a degree under uncertainty</h3>
-      <p class="dim">I arrived genuinely unsure what to enrol in. I was drawn to computer hardware and wanted Computer Engineering &mdash; but it&rsquo;s a longer degree here, so I chose Computer Science. At the time it felt like a compromise. It was the best decision of the degree.</p>
-    </div></div>
-
-    <div class="leg rv"><div class="yr">THEN</div><div class="leg-b">
-      <h3>Software engineering clicked. AI engineering clicked harder.</h3>
-      <p class="dim">Building things I could hand to someone turned out to be the part I liked most. And the models I&rsquo;d been using as a study aid became the thing I most wanted to understand &mdash; not as products, as systems.</p>
-    </div></div>
-
-    <div class="leg rv"><div class="yr">MATH</div><div class="leg-b">
-      <h3>Adding the mathematics minor</h3>
-      <p class="dim">Not decoration on the degree. Linear algebra and probability aren&rsquo;t adjacent to these models &mdash; they <em>are</em> the models. The minor was the most direct way to stop treating the internals as a black box, and I like the subject on its own terms.</p>
-    </div></div>
-
-    <div class="leg rv"><div class="yr">NOW</div><div class="leg-b">
-      <h3>Building, and looking for the room where this is the work</h3>
-      <p class="dim">Shipping projects end to end, reading toward retrieval and model internals, and looking for a team where I can do this alongside people far better at it than I am.</p>
-    </div></div>
-  </div>
-</section>
-
-<!-- ══ WORK ══════════════════════════════════════════════════ -->
-<section class="sec" id="work">
-  <div class="sec-head rv">
-    <p class="eyebrow">03 &mdash; selected work</p>
-    <h2 class="h2">Things I&rsquo;ve<br><span class="tint">actually shipped.</span></h2>
-  </div>
-
-  <div class="work">
-
-    <article class="job rv">
-      <div class="job-top">
-        <h3 class="job-name">RentScout&nbsp;AI</h3>
-        <span class="job-kind">Full-stack &middot; data &middot; 2025</span>
+<!-- ─── 02 Experience ────────────────────────────────────────────────── -->
+<section id="experience" class="section">
+  <p class="label">02 — Experience</p>
+  <h2 class="heading">Where I've worked</h2>
+  <ol class="timeline">
+    <li class="job reveal">
+      <div class="job-when"><span>Jul 2026 – Present</span><span class="muted">Langley, BC</span></div>
+      <div class="card">
+        <h3 class="job-role">Co-Founder &amp; Technical Lead</h3>
+        <p class="job-org">CanServe AI <span class="muted">· AI automation consultancy for home-service businesses</span></p>
+        <ul class="points">
+          <li>Architected a multi-tenant AI voice receptionist with Retell AI, n8n, Supabase and Twilio, with per-tenant configuration driving call routing, appointment booking and human escalation.</li>
+          <li>Designed 5 function-calling schemas so the agent can book appointments, capture lead details and hand off mid-call without losing context.</li>
+          <li>Ran direct outreach to 8 trades businesses across Langley, Surrey and Abbotsford, delivering live demos and iterating agent behaviour from real call transcripts.</li>
+        </ul>
+        <div class="chips"><span>Retell AI</span><span>n8n</span><span>Supabase</span><span>Twilio</span><span>Function calling</span></div>
       </div>
-      <div class="job-body">
-        <div class="stack">
-          <p style="font-family:var(--f-ed); font-style:italic; font-size:clamp(1.2rem,2.3vw,1.6rem); line-height:1.35; color:var(--gold); max-width:24ch">
-            Before you send that deposit, check the listing.
-          </p>
-          <p class="dim">
-            Vancouver&rsquo;s rental market runs on scams that target people who don&rsquo;t know what
-            rent <em>should</em> cost, don&rsquo;t know their tenant rights, and need housing urgently.
-            I was one of those people. Every rental site shows you listings; none help you
-            <em>judge</em> one.
-          </p>
-          <div class="chips">
-            <span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">PostgreSQL</span>
-            <span class="chip">SQLAlchemy</span><span class="chip">Next.js 16</span><span class="chip">TypeScript</span>
-            <span class="chip">Tailwind</span><span class="chip">Docker</span><span class="chip">GitHub Actions</span>
-          </div>
-          <div class="callout">
-            <p class="eyebrow">The decision I&rsquo;m proudest of</p>
-            <p class="dim" style="max-width:none">
-              There is no legal way to bulk-scrape Craigslist or Marketplace, so the first version
-              ranked generated sample listings. It looked richer in a demo and helped no one find
-              housing &mdash; and the scam check was quietly pricing listings against that same
-              invented data. I <strong>deleted the search page</strong> and rebuilt the price check on
-              real CMHC survey rents. A tool that helps people avoid being deceived cannot cut
-              corners on what it claims about itself.
-            </p>
-          </div>
+    </li>
+    <li class="job reveal">
+      <div class="job-when"><span>Jul 2025 – Aug 2026</span><span class="muted">Langley, BC</span></div>
+      <div class="card">
+        <h3 class="job-role">Freelance Software Developer</h3>
+        <p class="job-org">Voice-Interactive Adventure Game <span class="muted">· Contract, independent client</span></p>
+        <ul class="points">
+          <li>Rescued an abandoned Java/Swing codebase by reverse-engineering the previous developer's compiled build to restore the full source, then extended it into a complete offline voice-driven interactive fiction engine.</li>
+          <li>Built a phrase-matching engine that routes spoken and typed input across 880 scripted interactions using weighted token similarity, stemming and story-position heuristics, verified at 100% routing accuracy in automated tests.</li>
+          <li>Developed an offline speech pipeline: Java microphone capture, grammar-constrained recognition with PocketSphinx and a custom phonetic dictionary, and synchronised playback of 830+ voice-actor clips.</li>
+        </ul>
+        <div class="chips"><span>Java</span><span>Swing</span><span>PocketSphinx</span><span>Speech recognition</span></div>
+      </div>
+    </li>
+    <li class="job reveal">
+      <div class="job-when"><span>Jun 2024 – Aug 2024</span><span class="muted">Langley, BC</span></div>
+      <div class="card">
+        <h3 class="job-role">Undergraduate Research Assistant</h3>
+        <p class="job-org">Trinity Western University</p>
+        <ul class="points">
+          <li>Investigated RNA secondary-structure prediction algorithms in Java, including simulated annealing, and identified a temperature-scheduling defect causing premature convergence.</li>
+          <li>Rebuilt the RNA secondary-structure visualisation in Java, making folding output easier for faculty to review.</li>
+        </ul>
+        <div class="chips"><span>Java</span><span>Algorithms</span><span>Simulated annealing</span></div>
+      </div>
+    </li>
+    <li class="job reveal">
+      <div class="job-when"><span>Sep 2023 – Apr 2024</span><span class="muted">Langley, BC</span></div>
+      <div class="card">
+        <h3 class="job-role">Undergraduate Teaching Assistant</h3>
+        <p class="job-org">Trinity Western University</p>
+        <ul class="points">
+          <li>Supported 40+ students per semester with debugging and object-oriented programming through weekly office hours and one-on-one sessions.</li>
+        </ul>
+        <div class="chips"><span>OOP</span><span>Mentoring</span></div>
+      </div>
+    </li>
+    <li class="job reveal">
+      <div class="job-when"><span>Jun 2023 – Present</span><span class="muted">Langley, BC</span></div>
+      <div class="card">
+        <h3 class="job-role">All Purpose Clerk</h3>
+        <p class="job-org">Safeway</p>
+        <ul class="points">
+          <li>Handled high-volume customer interactions and time-sensitive tasks under pressure, building the consistency and reliability I now bring to client work.</li>
+        </ul>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ─── 03 Selected work ─────────────────────────────────────────────── -->
+<section id="work" class="section">
+  <p class="label">03 — Selected work</p>
+  <h2 class="heading">Things I've built</h2>
+
+  <article class="card feature reveal">
+    <div class="feature-head">
+      <div>
+        <p class="kicker">Featured project · May 2026 – Present</p>
+        <h3 class="script feature-title">RentScout AI</h3>
+        <p class="feature-tagline">Before you send that deposit, check the listing.</p>
+      </div>
+      <div class="buttons">
+        <!-- Add the live URL here once it's deployed:
+        <a class="btn btn-solid" href="https://…" target="_blank" rel="noopener">Live demo ↗</a> -->
+        <a class="btn" href="https://github.com/vanshikashyam9/rentscout-ai" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="two">
+      <div>
+        <p class="body">Vancouver's rental market runs on scams that target people who don't know what rent should cost, don't know their tenant rights, and need housing urgently. I was one of those people. Every rental site shows you listings; none help you judge one.</p>
+        <div class="quote">
+          <p class="kicker">The decision I'm proudest of</p>
+          <p class="body">The first version ranked generated sample listings. It looked richer in a demo and helped no one find housing, and the scam check was quietly pricing listings against that same invented data. I cut rental search and rebuilt the price check on real CMHC rents.</p>
         </div>
-        <dl class="facts">
-          <div class="fact"><dt>Scam screen</dt><dd>Weighted signals across payment red flags, manufactured urgency, and prices benchmarked against CMHC average rents for that zone and bedroom count &mdash; not a flat threshold.</dd></div>
-          <div class="fact"><dt>Market data</dt><dd>Real CMHC Rental Market Survey vacancy rates, 29 Metro Vancouver zones, 2022&ndash;2025, each with a plain-English read.</dd></div>
-          <div class="fact"><dt>Budget planner</dt><dd>Live verdict from income and expenses, with a warning when rent crosses the 30%-of-income guideline.</dd></div>
-          <div class="fact"><dt>Engineering</dt><dd>Dockerised front and back, JWT + bcrypt auth, deterministic seed data, CI running lint, typecheck, build and API smoke tests.</dd></div>
-          <div class="fact"><dt>In progress</dt><dd>A retrieval-augmented assistant over the BC Residential Tenancy Act, answering with citations to the actual legislation.</dd></div>
-        </dl>
       </div>
-    </article>
+      <ul class="points">
+        <li>Full-stack platform (~3,500 LOC) with 16 REST endpoints and a 7-table PostgreSQL schema.</li>
+        <li>Scam screen weighing payment red flags, manufactured urgency, and prices benchmarked against CMHC rents for that zone and bedroom count.</li>
+        <li>CMHC rent and vacancy data for 29 Metro Vancouver zones powering market comparison and affordability checks.</li>
+        <li>OpenAI API for neighbourhood insights and plain-English explanations of scam risk.</li>
+        <li>Dockerised, JWT + bcrypt auth, CI running lint, typecheck, build and API smoke tests.</li>
+      </ul>
+    </div>
+    <div class="chips chips-lg"><span>FastAPI</span><span>Python</span><span>PostgreSQL</span><span>OpenAI API</span><span>Next.js</span><span>TypeScript</span><span>Docker</span></div>
+  </article>
 
-    <article class="job muted rv">
-      <div class="job-top">
-        <h3 class="job-name">Project&nbsp;Two</h3>
-        <span class="job-kind">Reserved &middot; awaiting r&eacute;sum&eacute;</span>
-      </div>
-      <div class="job-body">
-        <p class="dim"><span class="todo" title="Send Claude your résumé and this fills in">placeholder</span>
-          &nbsp;&mdash; built and styled, waiting on content. Drop your r&eacute;sum&eacute; in and this becomes
-          a real case study in the same shape as RentScout: the problem, the decisions, the
-          stack, and the one call you&rsquo;d defend in an interview.</p>
-      </div>
+  <div class="grid">
+    <article class="card reveal">
+      <p class="kicker">Sep 2025 – Present</p>
+      <h3 class="card-title">GiveSync</h3>
+      <p class="body">Donation-tracking app for Food Link Society. Project owner and backend developer on a live client engagement, recognised as the top project in the class. Tracks donations and volunteers with offline storage and automatic Firebase sync, plus automated email summaries and CSV reports.</p>
+      <div class="chips"><span>Flutter</span><span>Dart</span><span>Firebase</span><span>REST APIs</span></div>
     </article>
-
-    <article class="job muted rv">
-      <div class="job-top">
-        <h3 class="job-name">Project&nbsp;Three</h3>
-        <span class="job-kind">Reserved &middot; awaiting r&eacute;sum&eacute;</span>
-      </div>
-      <div class="job-body">
-        <p class="dim"><span class="todo" title="Send Claude your résumé and this fills in">placeholder</span>
-          &nbsp;&mdash; coursework counts here, especially from the maths minor. Attention implemented
-          from scratch, or a numerical methods assignment you took further than required, would
-          sit perfectly against the story above.</p>
-      </div>
-    </article>
-
   </div>
 </section>
 
-<!-- ══ TOOLKIT ═══════════════════════════════════════════════ -->
-<section class="sec" id="kit">
-  <div class="sec-head rv">
-    <p class="eyebrow">04 &mdash; what I work with</p>
-    <h2 class="h2">Toolkit,<br><span class="tint">honestly labelled.</span></h2>
-  </div>
-  <div class="kit rv">
-    <div class="kit-c"><h3>Languages</h3><ul><li>Python</li><li>TypeScript</li><li>JavaScript</li><li>SQL</li></ul></div>
-    <div class="kit-c"><h3>Building</h3><ul><li>FastAPI</li><li>Next.js &middot; React</li><li>SQLAlchemy</li><li>Tailwind CSS</li></ul></div>
-    <div class="kit-c"><h3>Data &amp; models</h3><ul><li>pandas</li><li>OpenAI API</li><li>Retrieval / RAG &mdash; <span class="todo" title="Confirm from your résumé">learning</span></li><li>BeautifulSoup</li></ul></div>
-    <div class="kit-c"><h3>Infrastructure</h3><ul><li>PostgreSQL</li><li>Docker &middot; compose</li><li>GitHub Actions CI</li><li>JWT &middot; bcrypt</li></ul></div>
-    <div class="kit-c"><h3>Mathematics</h3><ul><li>Linear algebra</li><li>Probability</li><li>Calculus</li><li><span class="todo" title="Add your upper-year courses">your courses here</span></li></ul></div>
-  </div>
-</section>
-
-<!-- ══ LIFE ══════════════════════════════════════════════════ -->
-<section class="sec" id="life">
-  <div class="sec-head rv">
-    <p class="eyebrow">05 &mdash; off the clock</p>
-    <h2 class="h2">The rest<br><span class="tint">of it.</span></h2>
-  </div>
-  <div class="life rv">
-    <div class="li"><span class="no">01</span>
-      <h3>An unscientific ranking of caf&eacute;s</h3>
-      <p class="dim">New city, new caf&eacute;s, ongoing. I have opinions about all of them and no consistent methodology whatsoever.</p>
+<!-- ─── 04 Tech stack ────────────────────────────────────────────────── -->
+<section id="skills" class="section">
+  <p class="label">04 — Tech stack</p>
+  <h2 class="heading">What I work with</h2>
+  <div class="grid">
+    <div class="card reveal">
+      <p class="kicker">Languages</p>
+      <div class="chips chips-lg"><span>Python</span><span>Java</span><span>C</span><span>C++</span><span>JavaScript</span><span>TypeScript</span><span>Dart</span><span>SQL</span><span>HTML/CSS</span></div>
     </div>
-    <div class="li"><span class="no">02</span>
-      <h3>Posting my life on YouTube</h3>
-      <p class="dim">It started as a way to get comfortable on camera, and it worked &mdash; it&rsquo;s a large part of why I can talk about my own work now without shrinking away from it. Confidence turned out to be a skill you build in public.</p>
+    <div class="card reveal">
+      <p class="kicker">Backend &amp; data</p>
+      <div class="chips chips-lg"><span>FastAPI</span><span>Flask</span><span>PostgreSQL</span><span>MySQL</span><span>MongoDB</span><span>Firebase / Firestore</span><span>Supabase</span><span>REST APIs</span><span>n8n</span><span>JWT auth</span><span>Docker</span><span>Railway</span></div>
     </div>
-    <div class="li"><span class="no">03</span>
-      <h3>Sleeping</h3>
-      <p class="dim">Listed sincerely and without apology. Ask me about it &mdash; I will defend the position.</p>
+    <div class="card reveal">
+      <p class="kicker">AI &amp; ML</p>
+      <div class="chips chips-lg"><span>OpenAI API</span><span>Function calling</span><span>Structured outputs</span><span>Retrieval pipelines</span><span>LLM evaluation</span><span>Retell AI</span><span>TensorFlow</span><span>scikit-learn</span><span>PocketSphinx</span></div>
+    </div>
+    <div class="card reveal">
+      <p class="kicker">Frontend, mobile &amp; tools</p>
+      <div class="chips chips-lg"><span>Next.js</span><span>Flutter</span><span>Git</span><span>GitLab</span><span>Bitbucket</span><span>Jira</span><span>Linux</span><span>Vercel</span><span>Agile</span></div>
     </div>
   </div>
 </section>
 
-<!-- ══ CONTACT ═══════════════════════════════════════════════ -->
-<section class="sec" id="contact">
-  <div class="sec-head rv">
-    <p class="eyebrow">06 &mdash; get in touch</p>
-    <h2 class="h2">I&rsquo;d like to<br><span class="tint">hear from you.</span></h2>
+<!-- ─── 05 Education ─────────────────────────────────────────────────── -->
+<section id="education" class="section">
+  <p class="label">05 — Education</p>
+  <div class="two reveal">
+    <div class="card edu">
+      <p class="kicker">Jan 2023 – May 2027</p>
+      <h3 class="card-title edu-school">Trinity Western University</h3>
+      <p class="lead">BSc Computer Science, Minor in Mathematics</p>
+      <div class="chips chips-lg"><span>GPA 3.66 / 4.30</span><span>Dean's List</span></div>
+      <p class="muted small">Langley, BC</p>
+    </div>
+    <div>
+      <h3 class="subheading">Achievements &amp; leadership</h3>
+      <ul class="awards">
+        <li><strong>32nd place, ICPC 2023 Regional Programming Contest</strong><span class="muted">Algorithmic problem-solving under time pressure.</span></li>
+        <li><strong>President, TWUMET Club (Math, Engineering &amp; Technology)</strong><span class="muted">Led a 30+ member club; organised 5 technical workshops and 3 industry speaker events.</span></li>
+        <li><strong>Steven Barre STEM Award for Women in STEM</strong><span class="muted">Also: Presidential Scholarship · Provost's Scholarship · COPAC Ministries Scholarship · TWU Award Fund.</span></li>
+      </ul>
+    </div>
   </div>
-  <div class="links rv">
-    <a class="lk" href="mailto:vanshikashyam9@gmail.com"><span class="w">Email</span><span class="a">vanshikashyam9@gmail.com</span></a>
-    <a class="lk" href="https://github.com/vanshikashyam9"><span class="w">GitHub</span><span class="a">vanshikashyam9</span></a>
-    <a class="lk" href="#"><span class="w">LinkedIn</span><span class="a">add your handle</span></a>
-    <a class="lk" href="#"><span class="w">YouTube</span><span class="a">add your channel</span></a>
+</section>
+
+<!-- ─── 06 Contact + résumé ──────────────────────────────────────────── -->
+<section id="contact" class="section">
+  <div class="contact reveal">
+    <p class="label">06 — Get in touch</p>
+    <h2 class="contact-heading">Let's build something people can rely on.</h2>
+    <p class="body contact-text">I'm looking for software engineering roles where I can ship real products alongside people who are better at this than I am. If that sounds like your team, I'd love to hear from you.</p>
+
+    <div class="buttons">
+      <a class="btn btn-solid" href="mailto:vanshikashyam9@gmail.com">vanshikashyam9@gmail.com ↗</a>
+      <button type="button" class="btn btn-light" id="copy-email" data-email="vanshikashyam9@gmail.com">Copy email</button>
+      <a class="btn btn-light" href="https://www.linkedin.com/in/vanshika-shyam" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn btn-light" href="https://github.com/vanshikashyam9" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+
+    <div id="resume" class="resume">
+      <div>
+        <p class="kicker">Résumé</p>
+        <p class="body contact-text">One page: experience, projects, skills and education.</p>
+      </div>
+      <!-- Drop the PDF at assets/resume.pdf and this button turns on -->
+      <a class="btn btn-solid btn-big" id="resume-link" href="assets/resume.pdf" download="Vanshika-Shyam-Resume.pdf">Download résumé (PDF) ↓</a>
+    </div>
   </div>
-  <footer>
-    <span>Vanshika Shyam &middot; Computer Science &amp; Mathematics</span>
-    <span>Shimla &rarr; Vancouver</span>
+
+  <footer class="footer">
+    <span>© 2026 Vanshika Shyam · Langley, BC</span>
+    <a class="to-top" href="#top">Back to top ↑</a>
   </footer>
 </section>
 
-</div><!-- /wrap -->
+</main>
 
-<script>
-(function () {
-  "use strict";
-  var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  document.documentElement.classList.add("js");
-
-  /* ── Reveals ─────────────────────────────────────────────── */
-  var rv = document.querySelectorAll(".rv");
-  if (reduced || !("IntersectionObserver" in window)) {
-    rv.forEach(function (e) { e.classList.add("in"); });
-  } else {
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
-      });
-    }, { rootMargin: "0px 0px -10% 0px", threshold: .05 });
-    rv.forEach(function (e) { io.observe(e); });
-  }
-
-  /* ── Cursor ──────────────────────────────────────────────── */
-  var dot = document.querySelector(".cur"), ring = document.querySelector(".cur-r");
-  if (dot && !reduced && matchMedia("(hover:hover)").matches) {
-    var mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
-    addEventListener("mousemove", function (e) {
-      mx = e.clientX; my = e.clientY;
-      dot.style.opacity = ring.style.opacity = 1;
-      dot.style.transform = "translate(" + mx + "px," + my + "px)";
-    }, { passive: true });
-    (function trail() {
-      rx += (mx - rx) * .16; ry += (my - ry) * .16;
-      ring.style.transform = "translate(" + rx + "px," + ry + "px)";
-      requestAnimationFrame(trail);
-    })();
-    document.querySelectorAll("a,.job,.leg").forEach(function (el) {
-      el.addEventListener("mouseenter", function () { ring.classList.add("hot"); });
-      el.addEventListener("mouseleave", function () { ring.classList.remove("hot"); });
-    });
-  }
-
-  /* ── Rail ────────────────────────────────────────────────── */
-  var links = [].slice.call(document.querySelectorAll(".rail a"));
-  var secs = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
-
-  /* ══ THE RIDGE ═══════════════════════════════════════════════
-     A skyline and a softmax distribution are the same shape: peaks
-     over a baseline. Each parallax layer is its own distribution of
-     Gaussian "mountains" pushed through softmax(s / T). Scrolling
-     raises T. The peaks flatten, the range becomes a plain, and the
-     readout shows the weight draining out of the tallest peak —
-     which is exactly what a long context does to an early token.  */
-  var cv = document.getElementById("ridge");
-  if (!cv) return;
-  var g = cv.getContext("2d");
-  var W = 0, H = 0, T = 0.4, mouseX = .5, mouseY = .5;
-
-  var LAYERS = [
-    { y: .60, h: .30, col: "#E4D6F5", n: 7,  seed: 11, par: .014, a: .95 },
-    { y: .70, h: .34, col: "#F4C6D8", n: 6,  seed: 29, par: .026, a: 1 },
-    { y: .80, h: .36, col: "#F9DCE7", n: 5,  seed: 47, par: .042, a: 1 },
-    { y: .91, h: .34, col: "#FDEEF3", col2: "#FFFBFC", n: 4, seed: 71, par: .062, a: 1 }
-  ];
-
-  function fin(v, fb) { return isFinite(v) ? v : fb; }
-
-  function rnd(s) { var x = Math.sin(s * 12.9898) * 43758.5453; return x - Math.floor(x); }
-
-  // softmax over Gaussian peaks, normalised so the tallest is 1
-  function profile(L, t, out) {
-    var N = out.length, i, k, mx = 0;
-    for (i = 0; i < N; i++) {
-      var x = i / (N - 1), s = 0;
-      for (k = 0; k < L.n; k++) {
-        var pos = rnd(L.seed + k) * 1.15 - .07;
-        var amp = .55 + rnd(L.seed + k + 100) * .85;
-        var wid = .035 + rnd(L.seed + k + 200) * .075;
-        var drift = Math.sin(t * (.08 + rnd(L.seed + k + 300) * .12) + k) * .012;
-        var d = x - (pos + drift);
-        s += amp * Math.exp(-(d * d) / (2 * wid * wid));
-      }
-      out[i] = s;
-      if (s > mx) mx = s;
-    }
-    // temperature: divide the scores, re-exponentiate, renormalise
-    var m2 = 0;
-    for (i = 0; i < N; i++) { out[i] = Math.exp(out[i] / T); if (out[i] > m2) m2 = out[i]; }
-    var base = Math.exp(0 / T), den = m2 - base;
-    if (!(den > 1e-6)) {                      // fully degenerate: even plateau
-      for (i = 0; i < N; i++) { out[i] = .5; }
-      return out;
-    }
-    for (i = 0; i < N; i++) {
-      var u = (out[i] - base) / den;
-      out[i] = 0.13 + 0.87 * (u < 0 ? 0 : u > 1 ? 1 : u);   // never collapse flat
-    }
-    return out;
-  }
-
-  var buf = new Float64Array(150);
-
-  function sky() {
-    var sg = g.createLinearGradient(0, 0, 0, H);
-    // The warm band has to land ON the skyline (~.25-.70 of the frame),
-    // not below it, or the mountains eat the alpenglow entirely.
-    sg.addColorStop(0,   "#FFFBFC");
-    sg.addColorStop(.26, "#FFF1F6");
-    sg.addColorStop(.44, "#FDE2EC");
-    sg.addColorStop(.57, "#FBD6E3");
-    sg.addColorStop(.67, "#FCD9D6");
-    sg.addColorStop(.76, "#FEE1D2");
-    sg.addColorStop(.88, "#FFEADF");
-    sg.addColorStop(1,   "#FFF3EC");
-    g.fillStyle = sg;
-    g.fillRect(0, 0, W, H);
-
-    // sun, sinking as the temperature climbs
-    var sy = fin(H * (.52 + (T - .4) * .055), H * .52);
-    var sx = fin(W * (.70 + (mouseX - .5) * .03), W * .70);
-    var r = Math.max(1, fin(Math.min(W, H) * .085, 40));
-    var gl = g.createRadialGradient(sx, sy, 0, sx, sy, r * 5.5);
-    gl.addColorStop(0, "rgba(255,255,255,.85)");
-    gl.addColorStop(.3, "rgba(248,190,212,.25)");
-    gl.addColorStop(1, "rgba(248,190,212,0)");
-    g.fillStyle = gl; g.fillRect(0, 0, W, H);
-    g.beginPath(); g.arc(sx, sy, r, 0, 6.2832);
-    g.fillStyle = "rgba(255,255,255,.95)"; g.fill();
-
-    // stars in the upper band
-    for (var i = 0; i < 70; i++) {
-      var x = rnd(i * 3 + 1) * W, y = rnd(i * 7 + 2) * H * .42;
-      g.globalAlpha = .15 + rnd(i * 11 + 3) * .35;
-      g.fillStyle = "#EE8FB4";
-      g.fillRect(x, y, 1.4, 1.4);
-    }
-    g.globalAlpha = 1;
-  }
-
-  function draw(t) {
-    if (!isFinite(T) || T <= 0 || !(W > 0) || !(H > 0)) return;
-    g.clearRect(0, 0, W, H);
-    sky();
-    for (var l = 0; l < LAYERS.length; l++) {
-      var L = LAYERS[l];
-      var p = profile(L, t, buf);
-      var shift = fin((mouseX - .5) * W * L.par, 0);
-      var baseY = H * L.y, amp = H * L.h;
-
-      g.beginPath();
-      g.moveTo(-40, H + 10);
-      for (var i = 0; i < buf.length; i++) {
-        var x = -40 + (i / (buf.length - 1)) * (W + 80) + shift;
-        g.lineTo(x, baseY - p[i] * amp);
-      }
-      g.lineTo(W + 40, H + 10);
-      g.closePath();
-
-      if (L.col2) {
-        var lg = g.createLinearGradient(0, baseY - amp, 0, H);
-        lg.addColorStop(0, L.col); lg.addColorStop(1, L.col2);
-        g.fillStyle = lg;
-      } else { g.fillStyle = L.col; }
-      g.globalAlpha = L.a; g.fill(); g.globalAlpha = 1;
-
-      // snowlit rim on the two far ranges
-      if (l < 2) {
-        g.beginPath();
-        for (var j = 0; j < buf.length; j++) {
-          var x2 = -40 + (j / (buf.length - 1)) * (W + 80) + shift;
-          var y2 = baseY - p[j] * amp;
-          j ? g.lineTo(x2, y2) : g.moveTo(x2, y2);
-        }
-        g.strokeStyle = l === 0 ? "rgba(214,69,126,.35)" : "rgba(255,255,255,.9)";
-        g.lineWidth = 1.2; g.stroke();
-      }
-    }
-  }
-
-  var gT = document.getElementById("g-t"), gP = document.getElementById("g-p"),
-      gB = document.getElementById("g-bar"), gN = document.getElementById("g-note");
-
-  function readout() {
-    // peak share of a 32-way softmax at this temperature — a real number
-    var n = 32, top = Math.exp(2.2 / T), rest = (n - 1) * Math.exp(0 / T);
-    var share = top / (top + rest);
-    if (gT) gT.textContent = "T = " + T.toFixed(2);
-    if (gP) gP.textContent = share.toFixed(2);
-    if (gB) gB.style.width = Math.max(3, share * 100) + "%";
-    if (gN) gN.textContent = share > .55 ? "Sharp. One peak takes almost everything."
-                          : share > .18 ? "Spreading. The range is losing its summits."
-                          : "Flat. Every token gets a near-equal, tiny share.";
-  }
-
-  function resize() {
-    var d = Math.min(devicePixelRatio || 1, 2);
-    W = innerWidth || 1;
-    H = cv.parentElement.offsetHeight || innerHeight || 1;
-    cv.width = W * d; cv.height = H * d;
-    cv.style.width = W + "px"; cv.style.height = H + "px";
-    g.setTransform(d, 0, 0, d, 0, 0);
-  }
-
-  addEventListener("mousemove", function (e) {
-    mouseX = fin(e.clientX / (innerWidth || 1), .5);
-    mouseY = fin(e.clientY / (innerHeight || 1), .5);
-  }, { passive: true });
-
-  function onScroll() {
-    var vh = innerHeight || 1;               // never divide by a zero viewport
-    var span = (cv.parentElement.offsetHeight || vh) * .8;
-    var p = scrollY / (span || vh);
-    if (!isFinite(p)) p = 0;
-    p = p < 0 ? 0 : p > 1 ? 1 : p;
-    T = 0.4 + p * 2.1;                       // scrolling heats the distribution
-    readout();
-    // Belt and braces: anything at or above the fold is shown regardless
-    // of whether the observer fired. Hidden content is never acceptable.
-    for (var v = 0; v < rv.length; v++) {
-      if (!rv[v].classList.contains("in") &&
-          rv[v].getBoundingClientRect().top < innerHeight * .98) {
-        rv[v].classList.add("in");
-      }
-    }
-    var mid = scrollY + innerHeight * .36, act = 0;
-    secs.forEach(function (s, i) { if (s && s.offsetTop <= mid) act = i; });
-    links.forEach(function (a, i) {
-      i === act ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current");
-    });
-  }
-  var tick = false;
-  addEventListener("scroll", function () {
-    if (tick) return; tick = true;
-    requestAnimationFrame(function () { onScroll(); tick = false; });
-  }, { passive: true });
-  addEventListener("resize", function () { resize(); if (reduced) draw(0); }, { passive: true });
-
-  resize(); onScroll();
-  if (reduced) { draw(0); }
-  else {
-    var warned = false;
-    (function loop(now) {
-      try { draw(now / 1000); }
-      catch (err) {
-        if (!warned) { warned = true; console.warn("ridge: frame skipped —", err && err.message); }
-      }
-      requestAnimationFrame(loop);          // keep going regardless
-    })(0);
-  }
-})();
-</script>
+<script src="script.js"></script>
 </body>
 </html>
