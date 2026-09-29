@@ -4,7 +4,8 @@ Status legend: `[x]` done · `[ ]` to do · `[~]` in progress
 
 ## Phase 1 — Foundation ✅
 - [x] Pick a stack: plain HTML/CSS/JS, one file, no build step
-- [x] Visual concept: alpenglow palette, softmax ridgeline hero
+- [x] Visual concept: softmax ridgeline hero
+- [x] Palette: white + pastel pinks/lavender/peach, raspberry as the only bold accent — 2026-09-28
 - [x] Sections: hero, the question, path, work, toolkit, life, contact
 - [x] RentScout AI case study
 - [x] RentScout copy matches the current product (search removed, CMHC price check) — 2026-09-28
@@ -42,3 +43,4 @@ Status legend: `[x]` done · `[ ]` to do · `[~]` in progress
 ## Log
 - 2026-09-10 — Site built; ridgeline redesign
 - 2026-09-28 — Tracker added; RentScout copy updated; GitHub linked
+- 2026-09-28 — Recoloured from dark alpenglow to white and baby-pink pastels

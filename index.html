@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFFBFC">
 <title>Vanshika Shyam</title>
 <meta name="description" content="Computer Science and Mathematics, Vancouver BC. A ridgeline drawn from a softmax distribution — Shimla to Vancouver, and the question that started it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,20 +18,22 @@
    mountains flatten. That is the hero, and it is also the story.
    ══════════════════════════════════════════════════════════════ */
 :root{
-  color-scheme: dark;
+  color-scheme: light;
 
-  --night:#070A12;
-  --deep:#0D1120;
-  --indigo:#141A2E;
-  --violet:#2A2F55;
-  --ridge:#3A3E68;
-  --rose:#E2739A;
-  --gold:#F5B25C;
-  --snow:#F2F4F8;
-  --haze:#9AA2C0;
-  --haze-dim:#646C8C;
-  --line:rgba(154,162,192,.16);
-  --line-soft:rgba(154,162,192,.08);
+  /* Mostly pastel: white, blush, baby pink, lavender, peach.
+     --gold is the one bold colour (raspberry) — accents only. */
+  --night:#FFFBFC;
+  --deep:#FFF1F5;
+  --indigo:#FDE4EC;
+  --violet:#C9B3EC;
+  --ridge:#F6CFDD;
+  --rose:#EE8FB4;
+  --gold:#D6457E;
+  --snow:#3B2A35;
+  --haze:#77606D;
+  --haze-dim:#957B89;
+  --line:rgba(214,120,160,.24);
+  --line-soft:rgba(214,120,160,.12);
 
   --f-disp:"Syne","Helvetica Neue",Arial,sans-serif;
   --f-ed:"Fraunces","Iowan Old Style",Georgia,serif;
@@ -60,7 +63,7 @@ body{
 body::after{
   content:"";
   position:fixed; inset:-50%; z-index:900; pointer-events:none;
-  opacity:.32; mix-blend-mode:overlay;
+  opacity:.10; mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='220' height='220' filter='url(%23n)' opacity='.5'/></svg>");
   animation:grain 7s steps(6) infinite;
 }
@@ -92,10 +95,10 @@ body::after{
 .cur{width:6px; height:6px; background:var(--gold); margin:-3px 0 0 -3px}
 .cur-r{
   width:34px; height:34px; margin:-17px 0 0 -17px;
-  border:1px solid rgba(226,115,154,.55);
+  border:1px solid rgba(238,143,180,.7);
   transition:width .35s var(--ease), height .35s var(--ease), margin .35s var(--ease), background .35s var(--ease), border-color .35s var(--ease);
 }
-.cur-r.hot{width:66px; height:66px; margin:-33px 0 0 -33px; background:rgba(245,178,92,.10); border-color:rgba(245,178,92,.75)}
+.cur-r.hot{width:66px; height:66px; margin:-33px 0 0 -33px; background:rgba(214,69,126,.08); border-color:rgba(214,69,126,.6)}
 @media (hover:none),(pointer:coarse){ .cur,.cur-r{display:none} }
 
 /* ── Type ───────────────────────────────────────────────────── */
@@ -134,7 +137,7 @@ a{color:inherit}
 a:focus-visible,button:focus-visible{outline:2px solid var(--gold); outline-offset:4px}
 
 .todo{
-  color:var(--gold); border-bottom:1px dashed rgba(245,178,92,.45);
+  color:var(--gold); border-bottom:1px dashed rgba(214,69,126,.45);
   font-family:var(--f-mono); font-size:.86em; cursor:help;
 }
 
@@ -203,7 +206,7 @@ section{position:relative; z-index:2}
 /* ── Marquee ────────────────────────────────────────────────── */
 .tick{
   border-block:1px solid var(--line); overflow:hidden; padding-block:18px;
-  background:rgba(20,26,46,.35); position:relative; z-index:4;
+  background:var(--deep); position:relative; z-index:4;
 }
 .tick-in{display:flex; width:max-content; animation:slide 34s linear infinite}
 .tick:hover .tick-in{animation-play-state:paused}
@@ -235,7 +238,7 @@ section{position:relative; z-index:2}
 .quote em{font-style:normal; color:var(--gold)}
 
 .figure{
-  border:1px solid var(--line); background:linear-gradient(170deg,rgba(42,47,85,.42),rgba(13,17,32,.6));
+  border:1px solid var(--line); background:linear-gradient(170deg,#FFF1F5,#F7F0FC);
   padding:var(--s4) var(--s3) var(--s3); display:flex; flex-direction:column; gap:var(--s3);
   position:sticky; top:var(--s4);
 }
@@ -270,7 +273,7 @@ section{position:relative; z-index:2}
 }
 .job::before{
   content:""; position:absolute; inset:0; z-index:0;
-  background:linear-gradient(100deg,rgba(226,115,154,.14),rgba(245,178,92,.07) 55%,transparent);
+  background:linear-gradient(100deg,rgba(248,200,220,.45),rgba(225,210,245,.3) 55%,transparent);
   transform:scaleX(0); transform-origin:left; transition:transform .75s var(--ease);
 }
 .job:hover::before{transform:scaleX(1)}
@@ -486,17 +489,17 @@ footer{
         <text class="axt" x="345" y="291" text-anchor="middle">context length n (tokens, log scale)</text>
         <defs>
           <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#F5B25C" stop-opacity=".30"></stop>
-            <stop offset="1" stop-color="#E2739A" stop-opacity="0"></stop>
+            <stop offset="0" stop-color="#EE8FB4" stop-opacity=".35"></stop>
+            <stop offset="1" stop-color="#C9B3EC" stop-opacity="0"></stop>
           </linearGradient>
         </defs>
         <path fill="url(#fade)" d="M70,30 L131,140 L192,195 L253,222 L314,236 L376,243 L437,247 L498,248 L559,249 L620,250 L70,250 Z"></path>
-        <path fill="none" stroke="#F5B25C" stroke-width="2.2" stroke-linejoin="round"
+        <path fill="none" stroke="#D6457E" stroke-width="2.2" stroke-linejoin="round"
               d="M70,30 L131,140 L192,195 L253,222 L314,236 L376,243 L437,247 L498,248 L559,249 L620,250"></path>
-        <circle cx="70" cy="30" r="4" fill="#F5B25C"></circle>
+        <circle cx="70" cy="30" r="4" fill="#D6457E"></circle>
         <text class="axt hot" x="82" y="27">n = 8 &rarr; 12.50% each</text>
-        <circle cx="559" cy="249" r="4" fill="#E2739A"></circle>
-        <text class="axt hot" x="551" y="238" text-anchor="end" style="fill:#E2739A">n = 2048 &rarr; 0.05% each</text>
+        <circle cx="559" cy="249" r="4" fill="#B195DE"></circle>
+        <text class="axt hot" x="551" y="238" text-anchor="end" style="fill:#9C7BD0">n = 2048 &rarr; 0.05% each</text>
       </svg>
       <p class="cap">
         &alpha;&#7522; = exp(s&#7522;) / &Sigma;&#11388; exp(s&#11388;). Hold the scores equal and every token&rsquo;s
@@ -737,10 +740,10 @@ footer{
   var W = 0, H = 0, T = 0.4, mouseX = .5, mouseY = .5;
 
   var LAYERS = [
-    { y: .60, h: .30, col: "#3A3E68", n: 7,  seed: 11, par: .014, a: .95 },
-    { y: .70, h: .34, col: "#2A2F55", n: 6,  seed: 29, par: .026, a: 1 },
-    { y: .80, h: .36, col: "#1C2140", n: 5,  seed: 47, par: .042, a: 1 },
-    { y: .91, h: .34, col: "#121628", col2: "#0A0C16", n: 4, seed: 71, par: .062, a: 1 }
+    { y: .60, h: .30, col: "#E4D6F5", n: 7,  seed: 11, par: .014, a: .95 },
+    { y: .70, h: .34, col: "#F4C6D8", n: 6,  seed: 29, par: .026, a: 1 },
+    { y: .80, h: .36, col: "#F9DCE7", n: 5,  seed: 47, par: .042, a: 1 },
+    { y: .91, h: .34, col: "#FDEEF3", col2: "#FFFBFC", n: 4, seed: 71, par: .062, a: 1 }
   ];
 
   function fin(v, fb) { return isFinite(v) ? v : fb; }
@@ -784,14 +787,14 @@ footer{
     var sg = g.createLinearGradient(0, 0, 0, H);
     // The warm band has to land ON the skyline (~.25-.70 of the frame),
     // not below it, or the mountains eat the alpenglow entirely.
-    sg.addColorStop(0,   "#05070E");
-    sg.addColorStop(.26, "#0F1330");
-    sg.addColorStop(.44, "#2B2048");
-    sg.addColorStop(.57, "#663856");
-    sg.addColorStop(.67, "#AB6260");
-    sg.addColorStop(.76, "#DE9A69");
-    sg.addColorStop(.88, "#F2BE86");
-    sg.addColorStop(1,   "#F7D6A6");
+    sg.addColorStop(0,   "#FFFBFC");
+    sg.addColorStop(.26, "#FFF1F6");
+    sg.addColorStop(.44, "#FDE2EC");
+    sg.addColorStop(.57, "#FBD6E3");
+    sg.addColorStop(.67, "#FCD9D6");
+    sg.addColorStop(.76, "#FEE1D2");
+    sg.addColorStop(.88, "#FFEADF");
+    sg.addColorStop(1,   "#FFF3EC");
     g.fillStyle = sg;
     g.fillRect(0, 0, W, H);
 
@@ -800,18 +803,18 @@ footer{
     var sx = fin(W * (.70 + (mouseX - .5) * .03), W * .70);
     var r = Math.max(1, fin(Math.min(W, H) * .085, 40));
     var gl = g.createRadialGradient(sx, sy, 0, sx, sy, r * 5.5);
-    gl.addColorStop(0, "rgba(255,214,150,.55)");
-    gl.addColorStop(.3, "rgba(245,178,92,.16)");
-    gl.addColorStop(1, "rgba(245,178,92,0)");
+    gl.addColorStop(0, "rgba(255,255,255,.85)");
+    gl.addColorStop(.3, "rgba(248,190,212,.25)");
+    gl.addColorStop(1, "rgba(248,190,212,0)");
     g.fillStyle = gl; g.fillRect(0, 0, W, H);
     g.beginPath(); g.arc(sx, sy, r, 0, 6.2832);
-    g.fillStyle = "rgba(255,226,178,.92)"; g.fill();
+    g.fillStyle = "rgba(255,255,255,.95)"; g.fill();
 
     // stars in the upper band
     for (var i = 0; i < 70; i++) {
       var x = rnd(i * 3 + 1) * W, y = rnd(i * 7 + 2) * H * .42;
-      g.globalAlpha = .18 + rnd(i * 11 + 3) * .5;
-      g.fillStyle = "#EDE6FF";
+      g.globalAlpha = .15 + rnd(i * 11 + 3) * .35;
+      g.fillStyle = "#EE8FB4";
       g.fillRect(x, y, 1.4, 1.4);
     }
     g.globalAlpha = 1;
@@ -851,7 +854,7 @@ footer{
           var y2 = baseY - p[j] * amp;
           j ? g.lineTo(x2, y2) : g.moveTo(x2, y2);
         }
-        g.strokeStyle = l === 0 ? "rgba(226,115,154,.34)" : "rgba(245,178,92,.22)";
+        g.strokeStyle = l === 0 ? "rgba(214,69,126,.35)" : "rgba(255,255,255,.9)";
         g.lineWidth = 1.2; g.stroke();
       }
     }
