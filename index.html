@@ -576,16 +576,17 @@ footer{
           <div class="callout">
             <p class="eyebrow">The decision I&rsquo;m proudest of</p>
             <p class="dim" style="max-width:none">
-              There is no legal way to bulk-scrape Craigslist or Marketplace. I could have
-              quietly shipped a scraper and let the demo look richer. Instead the search page
-              runs on <strong>clearly-labelled sample data</strong> and the product focuses on what it
-              can honestly do. The market data is real. A tool that helps people avoid being
-              deceived cannot cut corners on what it claims about itself.
+              There is no legal way to bulk-scrape Craigslist or Marketplace, so the first version
+              ranked generated sample listings. It looked richer in a demo and helped no one find
+              housing &mdash; and the scam check was quietly pricing listings against that same
+              invented data. I <strong>deleted the search page</strong> and rebuilt the price check on
+              real CMHC survey rents. A tool that helps people avoid being deceived cannot cut
+              corners on what it claims about itself.
             </p>
           </div>
         </div>
         <dl class="facts">
-          <div class="fact"><dt>Scam screen</dt><dd>Weighted signals across payment red flags, manufactured urgency, and prices benchmarked against the cheapest real listings in that specific neighbourhood &mdash; not a flat threshold.</dd></div>
+          <div class="fact"><dt>Scam screen</dt><dd>Weighted signals across payment red flags, manufactured urgency, and prices benchmarked against CMHC average rents for that zone and bedroom count &mdash; not a flat threshold.</dd></div>
           <div class="fact"><dt>Market data</dt><dd>Real CMHC Rental Market Survey vacancy rates, 29 Metro Vancouver zones, 2022&ndash;2025, each with a plain-English read.</dd></div>
           <div class="fact"><dt>Budget planner</dt><dd>Live verdict from income and expenses, with a warning when rent crosses the 30%-of-income guideline.</dd></div>
           <div class="fact"><dt>Engineering</dt><dd>Dockerised front and back, JWT + bcrypt auth, deterministic seed data, CI running lint, typecheck, build and API smoke tests.</dd></div>
@@ -668,7 +669,7 @@ footer{
   </div>
   <div class="links rv">
     <a class="lk" href="mailto:vanshikashyam9@gmail.com"><span class="w">Email</span><span class="a">vanshikashyam9@gmail.com</span></a>
-    <a class="lk" href="#"><span class="w">GitHub</span><span class="a">add your handle</span></a>
+    <a class="lk" href="https://github.com/vanshikashyam9"><span class="w">GitHub</span><span class="a">vanshikashyam9</span></a>
     <a class="lk" href="#"><span class="w">LinkedIn</span><span class="a">add your handle</span></a>
     <a class="lk" href="#"><span class="w">YouTube</span><span class="a">add your channel</span></a>
   </div>
