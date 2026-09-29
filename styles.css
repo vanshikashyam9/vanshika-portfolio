@@ -193,3 +193,13 @@ a { color: inherit; }
 .scholarships strong { color: var(--accent); white-space: nowrap; }
 .cert { padding: 20px 24px; }
 .cert-title { margin: 0; font-size: 17px; font-weight: 700; }
+
+/* ─── Tech stack ───────────────────────────────────────────────── */
+.stack-legend { display: flex; align-items: center; gap: 10px; margin: -20px 0 24px; font-size: 14px; }
+.core-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+.stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.stack-title { margin: 0 0 4px; font-size: 19px; font-weight: 700; }
+.stack-sub { margin: 0; font-size: 14px; }
+.stack-card .chips { margin-top: 18px; }
+.stack-card .chips span { font-size: 13.5px; padding: 7px 13px; }
+.chips span.core { background: var(--accent); color: #fff; }
