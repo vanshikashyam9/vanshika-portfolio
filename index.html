@@ -186,6 +186,19 @@
       <p class="body">Donation-tracking app for Food Link Society. Project owner and backend developer on a live client engagement, recognised as the top project in the class. Tracks donations and volunteers with offline storage and automatic Firebase sync, plus automated email summaries and CSV reports.</p>
       <div class="chips"><span>Flutter</span><span>Dart</span><span>Firebase</span><span>REST APIs</span></div>
     </article>
+
+    <article class="card reveal">
+      <p class="kicker">Aug 2026</p>
+      <h3 class="card-title">Mini-Redis</h3>
+      <p class="body">A Redis-compatible server built from scratch in Python over raw TCP sockets, with no Redis libraries. It speaks the real RESP protocol, so the official <code>redis-cli</code> works against it.</p>
+      <ul class="points">
+        <li>PING, SET (with EX expiry), GET, DEL, EXISTS and EXPIRE, routed through a command dispatch table.</li>
+        <li>One thread per client and a lock-protected in-memory store, so concurrent connections stay safe; expired keys are cleared lazily on access.</li>
+        <li>Unit-tested, containerised with Docker, deployed on Railway, and paired with a Flask web UI that turns button clicks into RESP commands.</li>
+      </ul>
+      <div class="chips"><span>Python</span><span>TCP sockets</span><span>RESP</span><span>Threading</span><span>Flask</span><span>Docker</span><span>Railway</span></div>
+      <a class="job-link" href="https://github.com/vanshikashyam9/mini-redis" target="_blank" rel="noopener">GitHub ↗</a>
+    </article>
   </div>
 </section>
 
