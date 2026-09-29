@@ -206,3 +206,5 @@ a { color: inherit; }
 
 .body code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; padding: 2px 6px; border-radius: 6px; background: rgba(255, 255, 255, 0.8); }
 .grid .card .points { margin-bottom: 4px; }
+.explainer { margin: -4px 0 14px; padding: 10px 14px; border-radius: 12px; background: rgba(255, 255, 255, 0.7); font-size: 14px; line-height: 1.5; }
+.explainer strong { color: var(--text); }
