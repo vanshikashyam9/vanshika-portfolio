@@ -12,7 +12,7 @@ Status legend: `[x]` done · `[ ]` to do · `[~]` in progress
 - [x] GitHub link in Contact — 2026-09-28
 
 ## Phase 2 — Content (needs you)
-- [~] **Résumé** — content is on the site; save a clean PDF as `assets/resume.pdf` (remove the hidden "Please select this resume…" line first)
+- [~] **Résumé** — content is on the site; add the final PDF as `assets/resume.pdf`
 - [x] Project Two — GiveSync (Food Link Society) — 2026-09-29
 - [ ] Project Three — coursework is fine (a maths-minor project fits the story best)
 - [x] LinkedIn URL — 2026-09-29
