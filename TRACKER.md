@@ -48,3 +48,4 @@ Status legend: `[x]` done · `[ ]` to do · `[~]` in progress
 - 2026-09-29 — Software + AI engineering intro and badge; Vancouver, BC; GPA removed; scholarships with amounts; OS certification; HPC/Linux in research; project-link slots
 - 2026-09-29 — Added Mini-Redis (github.com/vanshikashyam9/mini-redis) to Selected work
 - 2026-09-29 — Prepared for vanshikashyam.com on GitHub Pages: CNAME, .nojekyll, absolute og:image and canonical URL
+- 2026-09-29 — Scroll fade works both ways: blocks fade in and out as they enter/leave, hero text drifts up on scroll

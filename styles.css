@@ -157,9 +157,10 @@ a { color: inherit; }
 .footer span { color: var(--muted); }
 .to-top { font-weight: 700; color: var(--accent); text-decoration: none; }
 
-/* ─── Scroll reveal (script.js adds .hidden, removes it on view) ── */
-.reveal { transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.hidden { opacity: 0; transform: translateY(28px); }
+/* ─── Scroll fade (script.js toggles .hidden / .above as blocks enter and leave) ── */
+.reveal { transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); will-change: opacity, transform; }
+.reveal.hidden { opacity: 0; transform: translateY(48px); }
+.reveal.hidden.above { transform: translateY(-48px); }
 
 /* ─── Small screens ─────────────────────────────────────────────── */
 @media (max-width: 820px) {

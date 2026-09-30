@@ -2,7 +2,7 @@
 // 1. Hero: the head and eyes turn towards the cursor
 // 2. Typing effect on the name
 // 3. Sticky nav that highlights the section in view
-// 4. Scroll reveal, copy email, résumé availability
+// 4. Scroll fade in both directions, copy email, résumé availability
 // ═══════════════════════════════════════════════════════════════
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -168,22 +168,54 @@ new IntersectionObserver(([entry]) => {
   if (entry.isIntersecting) navLinks.forEach((a) => a.classList.remove("active"))
 }, { threshold: 0.5 }).observe(hero)
 
-// ─── 4. Scroll reveal ──────────────────────────────────────────
+// ─── 4. Scroll fade, both ways ─────────────────────────────────
+// Blocks fade and slide in as they enter the screen and fade back out as
+// they leave, scrolling down or up. They slide in from the side they enter.
 if (!reduceMotion) {
-  const revealObserver = new IntersectionObserver(
+  const blocks = document.querySelectorAll(".reveal, .section > .label, .section > .heading, .stack-legend")
+  const fadeObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return
-        entry.target.classList.remove("hidden")
-        revealObserver.unobserve(entry.target)
+        const el = entry.target
+        if (entry.isIntersecting) {
+          el.classList.remove("hidden", "above")
+        } else {
+          el.classList.add("hidden")
+          // Left through the top edge: hide it above, so it comes back down
+          el.classList.toggle("above", entry.boundingClientRect.top < 0)
+        }
       })
     },
-    { rootMargin: "0px 0px -10% 0px" }
+    // Only the middle band of the screen counts as "in view", so blocks
+    // fade out just before they reach the edges rather than off-screen
+    { rootMargin: "-8% 0px -8% 0px" }
   )
-  document.querySelectorAll(".reveal").forEach((el) => {
-    el.classList.add("hidden")
-    revealObserver.observe(el)
+  blocks.forEach((el) => {
+    el.classList.add("reveal", "hidden")
+    fadeObserver.observe(el)
   })
+
+  // Hero intro drifts up and fades as you start scrolling
+  const intro = document.querySelector(".hero-intro")
+  let ticking = false
+  const onFrame = () => {
+    const progress = Math.min(1, window.scrollY / (hero.offsetHeight * 0.55))
+    intro.style.opacity = String(1 - progress)
+    intro.style.transform = `translateY(${-40 * progress}px)`
+    // A fast flick can skip a block straight past the screen without the
+    // observer seeing it leave, so keep hidden blocks on the right side
+    blocks.forEach((el) => {
+      if (el.classList.contains("hidden")) el.classList.toggle("above", el.getBoundingClientRect().top < 0)
+    })
+    ticking = false
+  }
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      ticking = true
+      requestAnimationFrame(onFrame)
+    }
+  }, { passive: true })
+  onFrame()
 }
 
 // ─── Copy email ────────────────────────────────────────────────
