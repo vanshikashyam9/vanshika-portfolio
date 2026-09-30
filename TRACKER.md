@@ -47,3 +47,4 @@ Status legend: `[x]` done · `[ ]` to do · `[~]` in progress
 - 2026-09-29 — Rebuilt from the Framer design: cursor-tracking portrait hero, typing name, experience, education, tech stack from the résumé; "Software Engineer" only
 - 2026-09-29 — Software + AI engineering intro and badge; Vancouver, BC; GPA removed; scholarships with amounts; OS certification; HPC/Linux in research; project-link slots
 - 2026-09-29 — Added Mini-Redis (github.com/vanshikashyam9/mini-redis) to Selected work
+- 2026-09-29 — Prepared for vanshikashyam.com on GitHub Pages: CNAME, .nojekyll, absolute og:image and canonical URL

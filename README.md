@@ -24,14 +24,17 @@ Then open http://localhost:4321
 
 ## Deploy
 
-Any static host works. Vercel:
+Hosted on GitHub Pages at https://vanshikashyam.com (the `CNAME` file holds
+the domain; `.nojekyll` makes Pages serve the files as-is). Pushing to `main`
+redeploys.
 
-    npx vercel --prod
+DNS at the registrar:
 
-Netlify, GitHub Pages and Cloudflare Pages all serve this directory as-is.
-After deploying, change `og:image` in `index.html` to the full URL
-(e.g. `https://yoursite.com/assets/social-preview.jpg`) — link previews
-need an absolute address.
+    A     @     185.199.108.153
+    A     @     185.199.109.153
+    A     @     185.199.110.153
+    A     @     185.199.111.153
+    CNAME www   vanshikashyam9.github.io
 
 ## Still to fill in
 
