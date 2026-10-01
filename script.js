@@ -67,28 +67,51 @@ function startTracking() {
   let target = { x: 0, y: 0 }
   const current = { x: 0, y: 0 }
   let shown = ""
+  const touchOnly = window.matchMedia("(hover: none)").matches
 
   const aim = (clientX, clientY) => {
     const r = hero.getBoundingClientRect()
     // Direction from the face to the cursor, -1..1 on each axis
     const fx = r.left + geo.offX + (geo.dispW * FACE.x) / 100
     const fy = r.top + geo.offY + (geo.dispH * FACE.y) / 100
-    const span = Math.max(window.innerWidth, window.innerHeight) * REACH
+    // Narrow phone screens get the shorter side, so a finger can reach a full turn
+    const side = touchOnly ? Math.min(window.innerWidth, window.innerHeight) : Math.max(window.innerWidth, window.innerHeight)
+    const span = side * REACH
     target = {
       x: Math.max(-1, Math.min(1, (clientX - fx) / span)),
       y: Math.max(-1, Math.min(1, (clientY - fy) / span)),
     }
   }
 
-  window.addEventListener("pointermove", (e) => aim(e.clientX, e.clientY), { passive: true })
-  window.addEventListener("touchmove", (e) => e.touches[0] && aim(e.touches[0].clientX, e.touches[0].clientY), { passive: true })
+  // Phones have no cursor: follow the finger while touching, and otherwise
+  // let her slowly look around on her own
+  let lastTouch = -Infinity
+
+  window.addEventListener("pointermove", (e) => {
+    if (e.pointerType !== "touch") aim(e.clientX, e.clientY)
+  }, { passive: true })
+  const onTouch = (e) => {
+    const t = e.touches[0]
+    if (!t) return
+    lastTouch = performance.now()
+    aim(t.clientX, t.clientY)
+  }
+  window.addEventListener("touchstart", onTouch, { passive: true })
+  window.addEventListener("touchmove", onTouch, { passive: true })
   document.addEventListener("pointerout", (e) => {
-    if (!e.relatedTarget) target = { x: 0, y: 0 }
+    if (!e.relatedTarget && e.pointerType !== "touch") target = { x: 0, y: 0 }
   })
 
-  const tick = () => {
-    current.x += (target.x - current.x) * 0.35
-    current.y += (target.y - current.y) * 0.35
+  const tick = (now) => {
+    // Three seconds after the last touch, go back to looking around
+    if (touchOnly && now - lastTouch > 3000) {
+      const t = now / 1000
+      target = { x: Math.sin(t * 0.55) * 0.85, y: Math.sin(t * 0.8 + 1) * 0.45 }
+    }
+    // Gentler easing for the idle look-around, snappier when following input
+    const ease = touchOnly && now - lastTouch > 3000 ? 0.06 : 0.35
+    current.x += (target.x - current.x) * ease
+    current.y += (target.y - current.y) * ease
     const col = Math.round(midCol + current.x * midCol)
     const row = Math.round(midRow + current.y * midRow)
     const key = `${col},${row}`
@@ -109,9 +132,17 @@ function whenLoaded(img) {
 whenLoaded(portrait).then(() => {
   layoutHero()
   window.addEventListener("resize", layoutHero)
-  // Decode the 4k pose sheet up front so the first head turn doesn't stall
+  // Decode the 4k pose sheet up front so the first head turn doesn't stall.
+  // Decode a detached copy (the one in the page sits in a hidden patch, and
+  // mobile Chrome never decodes hidden images), and never wait more than 1.5s.
+  const decodeSheet = () => {
+    const copy = new Image()
+    copy.src = sheet.currentSrc || sheet.src
+    return copy.decode ? copy.decode() : Promise.resolve()
+  }
+  const timeout = new Promise((resolve) => setTimeout(resolve, 1500))
   whenLoaded(sheet)
-    .then(() => sheet.decode?.())
+    .then(() => Promise.race([decodeSheet(), timeout]))
     .catch(() => {})
     .then(startTracking)
 })

@@ -49,3 +49,4 @@ Status legend: `[x]` done · `[ ]` to do · `[~]` in progress
 - 2026-09-29 — Added Mini-Redis (github.com/vanshikashyam9/mini-redis) to Selected work
 - 2026-09-29 — Prepared for vanshikashyam.com on GitHub Pages: CNAME, .nojekyll, absolute og:image and canonical URL
 - 2026-09-29 — Scroll fade works both ways: blocks fade in and out as they enter/leave, hero text drifts up on scroll
+- 2026-10-01 — Phone pass: no sideways scroll down to 320px, stacked contact buttons, smaller nav, readable labels on dark card; on touch screens the head looks around by itself and follows the finger; fixed mobile decode hang; cache-busting ?v= on CSS/JS
